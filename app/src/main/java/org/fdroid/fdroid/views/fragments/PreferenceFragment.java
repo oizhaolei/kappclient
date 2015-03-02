@@ -17,7 +17,7 @@ import org.fdroid.fdroid.installer.CheckRootAsyncTask;
 import org.fdroid.fdroid.installer.Installer;
 
 public class PreferenceFragment
-        extends android.preference.PreferenceFragment
+        extends android.support.v4.preference.PreferenceFragment
         implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static String[] summariesToUpdate = {

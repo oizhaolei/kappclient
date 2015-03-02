@@ -47,9 +47,9 @@ public class PreferencesActivity extends ActionBarActivity {
             setContentView(new LinearLayout(this));
 
             PreferenceFragment preferenceFragment = new PreferenceFragment();
-//            fm.beginTransaction()
-//                    .add(android.R.id.content, preferenceFragment)
-//                    .commit();
+            fm.beginTransaction()
+                    .add(android.R.id.content, preferenceFragment)
+                    .commit();
         }
 
         // Actionbar cannot be accessed until after setContentView (on 3.0 and 3.1 devices)
