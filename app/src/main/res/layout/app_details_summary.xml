@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+    android:orientation="vertical"
+	android:paddingTop="4dp"
+	android:paddingBottom="8dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
+
+    <TextView
+		android:id="@+id/summary"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textStyle="bold"
+        tools:text="Application manager"/>
+
+	<TextView
+		android:id="@+id/appid"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textSize="12sp"
+        tools:text="org.fdroid.fdroid" />
+
+	<TextView
+		android:id="@+id/signature"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textSize="12sp" />
+
+	<TextView
+		android:id="@+id/antifeatures"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="6sp"
+		android:textStyle="bold"
+		android:textColor="#ff0000"
+        tools:text="Feeds you too much chocolate" />
+
+	<TextView
+		android:id="@+id/description"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="8sp"
+		android:textSize="13sp"
+		android:singleLine="false"
+        tools:text="Connects to K-App compatible repositories. The default repo is hosted at f-droid.org, which contains only bona fide FOSS.
+
+Android is open in the sense that you are free to install apks from anywhere you wish, but there are many good reasons for using a client/repository setup:
+
+    * Be notified when updates are available
+    * Keep track of older and beta versions
+    * Filter apps that aren't compatible with the device
+    * Find apps via categories and searchable descriptions
+    * Access associated urls for donations, source code etc.
+    * Stay safe by checking repo index signatures and apk hashes
+
+Changelog" />
+
+	<TextView
+		android:id="@+id/permissions"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="8sp"
+		android:singleLine="true"
+		android:textStyle="bold"
+        tools:text="Permissions for version 1.0" />
+
+	<TextView
+		android:id="@+id/permissions_list"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textSize="13sp"
+		android:singleLine="false"
+        tools:text="    * Full network access
+    * View network connections
+    * View Wi-Fi connections
+    * Connect and disconnect from Wi-Fi
+    * Pair with Bluetooth devices
+    * Run at startup
+    * Modify or delete the contents of your USB storage
+    * Control Near Field Communication
+    * Directly install apps
+    * Delete apps
+    * Full permission to all device features and storage
+    * Test access to protected storage" />
+
+</LinearLayout>

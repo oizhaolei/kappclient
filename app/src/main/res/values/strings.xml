@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="searchres_napps">Found %1$d applications matching \'%2$s\':</string>
+	<string name="searchres_oneapp">Found one application matching \'%s\':</string>
+	<string name="searchres_noapps">No applications were found matching \'%s\'</string>
+	<string name="SignatureMismatch">The new version is signed with a different key to the old one. To install the new version, the old one must be uninstalled first. Please do this and try again. (Note that uninstalling will erase any internal data stored by the application)</string>
+	<string name="installIncompatible">It seems like this package is not compatible with your device. Do you want to try and install it anyway?</string>
+	<string name="installDowngrade">You are trying to downgrade this application. Doing so might get it to malfunction and even lose your data. Do you want to try and downgrade it anyway?</string>
+	<string name="version">Version</string>
+	<string name="edit">Edit</string>
+	<string name="delete">Delete</string>
+	<string name="enable_nfc_send">Enable NFC Send…</string>
+	<string name="cache_downloaded">App cache</string>
+	<string name="cache_downloaded_on">Keep downloaded apk files on SD card</string>
+	<string name="updates">Updates</string>
+	<string name="other">Other</string>
+	<string name="last_update_check">Last repo scan: %s</string>
+	<string name="never">never</string>
+
+	<string name="update_interval">Automatic update interval</string>
+	<string name="update_interval_zero">No automatic app list updates</string>
+	<string name="automatic_scan_wifi">Only on wifi</string>
+	<string name="automatic_scan_wifi_on">Update app lists automatically only on wifi</string>
+	<string name="notify">Notify</string>
+	<string name="notify_on">Notify when updates are available</string>
+	<string name="update_history">Update history</string>
+	<string name="update_history_summ">Days to consider apps new or recent: %s</string>
+	<string name="root_installer">Install using root access</string>
+	<string name="root_installer_on">Request root access to install, update, and remove packages</string>
+	<string name="system_installer">Install using system-permissions</string>
+	<string name="system_installer_on">Use system permissions to install, update, and remove packages</string>
+	<string name="local_repo_bonjour">Broadcast Local Repo</string>
+	<string name="local_repo_bonjour_on">Advertise your local repo using Bonjour (mDNS)</string>
+	<string name="local_repo_name">Name of your Local Repo</string>
+	<string name="local_repo_name_summary">The advertised title of your local repo: %s</string>
+	<string name="local_repo_https">Use Private Connection</string>
+	<string name="local_repo_https_on">Use encrypted HTTPS:// connection for local repo</string>
+
+	<string name="search_results">Search Results</string>
+	<string name="app_details">App Details</string>
+	<string name="no_such_app">No such app found</string>
+
+	<string name="about_title">About K-App</string>
+	<string name="about_desc">Originally based on Aptoide.\nReleased under the
+		GNU GPLv3 license.</string>
+	<string name="about_site">Website: </string>
+	<string name="about_mail">Email: </string>
+	<string name="about_version">Version: </string>
+	<string name="about_website">Website</string>
+
+	<string name="no_repo">You don\'t have any repositories configured!\n\nA
+		repository is a source of applications. To add one, press the MENU
+		button now and enter the URL.\n\nA repository address looks something
+		like
+		this: https://f-droid.org/repo</string>
+
+	<string name="inst">Installed</string>
+	<string name="not_inst">Not Installed</string>
+	<string name="inst_known_source">Installed (from %s)</string>
+	<string name="inst_unknown_source">Installed (from unknown source)</string>
+
+	<string name="added_on">Added on %s</string>
+
+	<string name="ok">OK</string>
+
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
+	<string name="repo_add_title">Add new repository</string>
+	<string name="repo_add_add">Add</string>
+
+	<string name="cancel">Cancel</string>
+	<string name="enable">Enable</string>
+	<string name="add_key">Add Key</string>
+	<string name="overwrite">Overwrite</string>
+	<string name="repo_delete_title">Choose repository to remove</string>
+
+	<string name="repo_update_title">Update repositories</string>
+	<string name="tab_noninstalled">Available</string>
+	<string name="tab_updates">Updates</string>
+	<string name="one_update_available">1 update is available.</string>
+	<string name="many_updates_available">%d updates are available.</string>
+	<string name="fdroid_updates_available">K-App Updates Available</string>
+	<string name="process_wait_title">Please Wait</string>
+	<string name="process_update_msg">Updating application list…</string>
+	<string name="download_server">Getting application from</string>
+	<string name="nfc_is_not_enabled">NFC is not enabled!</string>
+	<string name="go_to_nfc_settings">Go to NFC Settings…</string>
+	<string name="bluetooth_activity_not_found">No Bluetooth send method found, choose one!</string>
+	<string name="choose_bt_send">Choose Bluetooth send method</string>
+	<string name="send_via_bluetooth">Send via Bluetooth</string>
+
+	<string name="repo_add_url">Repository address</string>
+	<string name="repo_add_fingerprint">Fingerprint (optional)</string>
+	<string name="repo_exists">This repo already exists!</string>
+	<string name="repo_exists_add_fingerprint">This repo is already setup, this will add new key information.</string>
+	<string name="repo_exists_enable">This repo is already setup, confirm that you want to re-enable it.</string>
+	<string name="repo_exists_and_enabled">The incoming repo is already setup and enabled!</string>
+	<string name="repo_delete_to_overwrite">You must first delete this repo before you can add one with a different key!</string>
+	<string name="malformed_repo_uri">Ignoring malformed repo URI: %s</string>
+
+	<string name="repo_alrt">The list of used repositories has
+		changed.\nDo you
+		want to update them?</string>
+
+	<string name="menu_update_repo">Update Repos</string>
+	<string name="menu_manage">Repositories</string>
+	<string name="menu_send_apk_bt">Bluetooth FDroid.apk…</string>
+	<string name="menu_preferences">Preferences</string>
+	<string name="menu_about">About</string>
+	<string name="menu_search">Search</string>
+	<string name="menu_add_repo">New Repository</string>
+	<string name="menu_rem_repo">Remove Repository</string>
+	<string name="menu_scan_repo">Find Local Repos</string>
+
+	<string name="menu_launch">Run</string>
+	<string name="menu_share">Share</string>
+	<string name="menu_install">Install</string>
+	<string name="menu_uninstall">Uninstall</string>
+	<string name="menu_ignore_all">Ignore All Updates</string>
+	<string name="menu_ignore_this">Ignore This Update</string>
+	<string name="menu_website">Website</string>
+	<string name="menu_issues">Issues</string>
+	<string name="menu_source">Source Code</string>
+	<string name="menu_upgrade">Upgrade</string>
+	<string name="menu_donate">Donate</string>
+
+	<string name="details_installed">Version %s installed</string>
+	<string name="details_notinstalled">Not installed</string>
+	<string name="corrupt_download">Downloaded file is corrupt</string>
+	<string name="download_cancelled">Download cancelled</string>
+
+	<string name="antiadslist">This app contains advertising</string>
+	<string name="antitracklist">This app tracks and reports your activity</string>
+	<string name="antinonfreeadlist">This app promotes non-free add-ons</string>
+	<string name="antinonfreenetlist">This app promotes non-free network services</string>
+	<string name="antinonfreedeplist">This app depends on other non-free apps</string>
+	<string name="antiupstreamnonfreelist">The upstream source code is not entirely Free</string>
+
+	<string name="display">Display</string>
+
+	<string name="expert">Expert</string>
+	<string name="expert_on">Show extra info and enable extra settings</string>
+
+	<string name="search_hint">Search applications</string>
+
+	<string name="appcompatibility">Application compatibility</string>
+	<string name="show_incompat_versions">Incompatible versions</string>
+	<string name="show_incompat_versions_on">Show app versions incompatible with the device</string>
+	<string name="rooted">Root</string>
+	<string name="rooted_on">Do not grey out apps requiring root privileges</string>
+	<string name="ignoreTouch">Ignore Touchscreen</string>
+	<string name="ignoreTouch_on">Always include apps that require touchscreen</string>
+
+	<string name="category_all">All</string>
+	<string name="category_whatsnew">What\'s New</string>
+	<string name="category_recentlyupdated">Recently Updated</string>
+
+	<string name="local_repo">Local Repo</string>
+	<string name="local_repos_title">Local FDroid Repos</string>
+	<string name="local_repos_scanning">Discovering local FDroid repos&#8230;</string>
+	<string name="local_repo_running">K-App is ready to swap</string>
+	<string name="waiting_for_ipaddress">waiting for IP address…</string>
+	<string name="setup_repo">Setup Local Repo</string>
+	<string name="touch_to_configure_local_repo">Touch to view details and allow others to swap your apps.</string>
+	<string name="touch_to_turn_on_local_repo">Touch to turn on your local repo.</string>
+	<string name="touch_to_turn_off_local_repo">Touch to turn off your local repo.</string>
+	<string name="updating">Updating&#8230;</string>
+	<string name="update_repo">Update Repo</string>
+	<string name="deleting_repo">Deleting current repo&#8230;</string>
+	<string name="adding_apks_format">Adding %s to repo&#8230;</string>
+	<string name="writing_index_jar">Writing signed index file (index.jar)&#8230;</string>
+	<string name="failed_to_create_index">Failed to create the repo index!</string>
+	<string name="linking_apks">Linking APKs into the repo&#8230;</string>
+	<string name="copying_icons">Copying app icons into the repo&#8230;</string>
+	<string name="updated_local_repo">Finished updating local repo</string>
+	<string name="no_applications_found">No applications found</string>
+	<string name="icon">icon</string>
+	<string name="fingerprint">Fingerprint:</string>
+	<string name="wifi_network">WiFi Network:</string>
+	<string name="sharing_uri">Sharing URL:</string>
+	<string name="enable_wifi">Enable WiFi</string>
+	<string name="enabling_wifi">Enabling WiFi&#8230;</string>
+	<string name="same_wifi_instructions">To connect to other people\'s devices, make sure both devices are on the same WiFi network.  Then either type the URL above into K-App, or scan this QR Code:</string>
+	<string name="qr_code">QR Code</string>
+	<string name="next">Next</string>
+	<string name="skip">Skip</string>
+	<string name="qr_content_description">QR Code of repo URL</string>
+	<string name="qr_wizard_wifi_network_instructions">Scan this QR Code to connect to the same WiFi network as this device.</string>
+	<string name="qr_wizard_download_instructions">Scan this QR Code to connect to the website for getting started.</string>
+	<string name="send_fdroid_via_wifi">Send FDroid via WiFi&#8230;</string>
+
+	<string name="proxy">Proxy</string>
+	<string name="enable_proxy_title">Enable HTTP Proxy</string>
+	<string name="enable_proxy_summary">Configure HTTP Proxy for all network requests</string>
+	<string name="proxy_host">Proxy Host</string>
+	<string name="proxy_host_summary">Configure your proxy\'s hostname (e.g. 127.0.0.1)</string>
+	<string name="proxy_port">Proxy Port</string>
+	<string name="proxy_port_summary">Configure your proxy\'s port number (e.g. 8118)</string>
+
+	<!--
+	status_download takes four parameters:
+	  - Repository (url)
+	  - Downloaded size (human readable)
+	  - Total size (human readable)
+	  - Percentage complete (int between 0-100)
+	-->
+	<string name="status_download">Downloading\n%2$s / %3$s (%4$d%%) from\n%1$s</string>
+	<string name="status_processing_xml">Processing application\n%2$d of %3$d from\n%1$s</string>
+	<string name="status_connecting_to_repo">Connecting to\n%1$s</string>
+	<string name="status_checking_compatibility">Checking apps compatibility with your device…</string>
+    <string name="status_inserting">Saving application details (%1$d%%)</string>
+	<string name="repos_unchanged">No repository has any package updates</string>
+        <string name="all_other_repos_fine">All other repos didn\'t create errors.</string>
+        <string name="global_error_updating_repos">Error during update:</string>
+	<string name="no_permissions">No permissions are used.</string>
+	<string name="permissions_for_long">Permissions for version %s</string>
+	<string name="showPermissions">Show permissions</string>
+	<string name="showPermissions_on">Display a list of permissions an app requires</string>
+	<string name="no_handler_app">You don\'t have any available app that can handle %s</string>
+	<string name="compactlayout">Compact Layout</string>
+	<string name="compactlayout_on">Show icons at a smaller size</string>
+    <string name="theme">Theme</string>
+    <string name="unsigned">Unsigned</string>
+    <string name="unverified">Unverified</string>
+    <string name="repo_url">URL</string>
+    <string name="repo_num_apps">Number of apps</string>
+    <string name="repo_fingerprint">Fingerprint of Repo Signing Key (SHA-256)</string>
+    <string name="repo_description">Description</string>
+    <string name="repo_last_update">Last update</string>
+    <string name="repo_update">Update</string>
+    <string name="repo_name">Name</string>
+    <string name="unsigned_description">This means that the list of
+        applications could not be verified. You should be careful
+        with applications downloaded from unsigned indexes.</string>
+    <string name="repo_not_yet_updated">This repository has not been used yet.
+        In order to view the apps it provides, you will need to update
+        it.\n\nOnce updated, the description and other details will
+        become available here.
+    </string>
+    <string name="repo_delete_details">Do you want to delete the \"{0}\"
+        repository, which has {1} apps in it? Any installed apps will NOT be
+        removed, but you will not be able to update them through K-App any
+        more.
+    </string>
+    <string name="unknown">Unknown</string>
+    <string name="repo_confirm_delete_title">Delete Repository?</string>
+    <string name="repo_confirm_delete_body">Deleting a repository means
+        apps from it will no longer be available from K-App.\n\nNote: All
+        previously installed apps will remain on your device.
+    </string>
+    <string name="repo_disabled_notification">Disabled "%1$s".\n\nYou will
+        need to re-enable this repository to install apps from it.
+    </string>
+    <string name="minsdk_or_later">%s or later</string>
+    <string name="up_to_maxsdk">up to %s</string>
+    <string name="minsdk_up_to_maxsdk">%1$s up to %2$s</string>
+    <string name="not_on_same_wifi">Your device is not on the same WiFi as the local repo you just added! Try joining this network: %s</string>
+    <string name="requires_features">Requires: %1$s</string>
+
+    <string name="app_icon">App icon</string>
+    <string name="repo_icon">Repo icon</string>
+
+    <string name="Children">Children</string>
+    <string name="Development">Development</string>
+    <string name="Games">Games</string>
+    <string name="Internet">Internet</string>
+    <string name="Mathematics">Mathematics</string>
+    <string name="Multimedia">Multimedia</string>
+    <string name="Navigation">Navigation</string>
+    <string name="News">News</string>
+    <string name="Office">Office</string>
+    <string name="Phone_SMS">Phone &amp; SMS</string>
+    <string name="Reading">Reading</string>
+    <string name="Science_Education">Science &amp; Education</string>
+    <string name="Security">Security</string>
+    <string name="System">System</string>
+    <string name="Wallpaper">Wallpaper</string>
+
+    <string name="requesting_root_access_title">Root access</string>
+    <string name="requesting_root_access_body">Requesting root access…</string>
+    <string name="root_access_denied_title">Root access denied</string>
+    <string name="root_access_denied_body">Either your Android device is not rooted or you have denied root access for K-App.</string>
+    <string name="update_all">Update all</string>
+    <string name="installer_error_title">(De-)Installation Error</string>
+    <string name="installer_error_body">The (de-)installation failed. If you are using root access, try disabling this setting!</string>
+    <string name="system_permission_denied_title">System permissions denied</string>
+    <string name="system_permission_denied_body">This option is only available when K-App is installed as a system-app.</string>
+
+    <string name="app_description">K-App is an installable catalogue of FOSS (Free and Open Source Software) applications for the Android platform. The client makes it easy to browse, install, and keep track of updates on your device.</string>
+    <string name="swap_nfc_description">If your friend has <b>K-App and NFC turned on</b> touch your phones together.</string>
+    <string name="swap_join_same_wifi">Join the same Wifi as your friend</string>
+    <string name="swap_use_bluetooth">Use Bluetooth instead</string>
+    <string name="swap_wifi_help">Learn more about Wifi</string>
+    <string name="swap_no_wifi_network">No network yet</string>
+    <string name="swap_view_available_networks">(Tap to open available networks)</string>
+    <string name="swap_wifi_qr_not_working">It\'s not working</string>
+    <string name="open_qr_code_scanner">Open QR Code Scanner</string>
+    <string name="swap_welcome">Welcome to K-App!</string>
+    <string name="swap_confirm_connect">Do you ant to get apps from %1$s now?</string>
+</resources>
