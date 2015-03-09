@@ -34,7 +34,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class SelectAppsFragment extends ThemeableListFragment
-    implements LoaderManager.LoaderCallbacks<Cursor>, SearchView.OnQueryTextListener {
+        implements LoaderManager.LoaderCallbacks<Cursor>, SearchView.OnQueryTextListener {
 
     private PackageManager packageManager;
     private Drawable defaultAppIcon;
@@ -107,11 +107,11 @@ public class SelectAppsFragment extends ThemeableListFragment
                 new ContextThemeWrapper(getActivity(), R.style.SwapTheme_AppList_ListItem),
                 R.layout.select_local_apps_list_item,
                 null,
-                new String[] {
+                new String[]{
                         InstalledAppProvider.DataColumns.APPLICATION_LABEL,
                         InstalledAppProvider.DataColumns.APP_ID,
                 },
-                new int[] {
+                new int[]{
                         R.id.application_label,
                         R.id.package_name,
                 });

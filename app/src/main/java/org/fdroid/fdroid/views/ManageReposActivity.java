@@ -252,7 +252,7 @@ public class ManageReposActivity extends ActionBarActivity {
         repoScanList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view,
-                    int position, long id) {
+                                    int position, long id) {
 
                 final DiscoveredRepo discoveredService =
                         (DiscoveredRepo) parent.getItemAtPosition(position);
@@ -485,7 +485,7 @@ public class ManageReposActivity extends ActionBarActivity {
         public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
             Uri uri = RepoProvider.getContentUri();
             Log.i("FDroid", "Creating repo loader '" + uri + "'.");
-            String[] projection = new String[] {
+            String[] projection = new String[]{
                     RepoProvider.DataColumns._ID,
                     RepoProvider.DataColumns.NAME,
                     RepoProvider.DataColumns.PUBLIC_KEY,

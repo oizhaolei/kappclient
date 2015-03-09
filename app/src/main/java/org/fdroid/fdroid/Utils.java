@@ -67,7 +67,7 @@ public final class Utils {
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
     private static final String[] FRIENDLY_SIZE_FORMAT = {
-            "%.0f B", "%.0f KiB", "%.1f MiB", "%.2f GiB" };
+            "%.0f B", "%.0f KiB", "%.1f MiB", "%.2f GiB"};
 
     public static final SimpleDateFormat LOG_DATE_FORMAT =
             new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
@@ -97,9 +97,9 @@ public final class Utils {
     }
 
     public static void copy(InputStream input, OutputStream output,
-                    ProgressListener progressListener,
-                    ProgressListener.Event templateProgressEvent)
-    throws IOException {
+                            ProgressListener progressListener,
+                            ProgressListener.Event templateProgressEvent)
+            throws IOException {
         byte[] buffer = new byte[BUFFER_SIZE];
         int bytesRead = 0;
         while (true) {
@@ -177,28 +177,28 @@ public final class Utils {
     }
 
     private static final String[] androidVersionNames = {
-        "?",     // 0, undefined
-        "1.0",   // 1
-        "1.1",   // 2
-        "1.5",   // 3
-        "1.6",   // 4
-        "2.0",   // 5
-        "2.0.1", // 6
-        "2.1",   // 7
-        "2.2",   // 8
-        "2.3",   // 9
-        "2.3.3", // 10
-        "3.0",   // 11
-        "3.1",   // 12
-        "3.2",   // 13
-        "4.0",   // 14
-        "4.0.3", // 15
-        "4.1",   // 16
-        "4.2",   // 17
-        "4.3",   // 18
-        "4.4",   // 19
-        "4.4W",  // 20
-        "5.0"    // 21
+            "?",     // 0, undefined
+            "1.0",   // 1
+            "1.1",   // 2
+            "1.5",   // 3
+            "1.6",   // 4
+            "2.0",   // 5
+            "2.0.1", // 6
+            "2.1",   // 7
+            "2.2",   // 8
+            "2.3",   // 9
+            "2.3.3", // 10
+            "3.0",   // 11
+            "3.1",   // 12
+            "3.2",   // 13
+            "4.0",   // 14
+            "4.0.3", // 15
+            "4.1",   // 16
+            "4.2",   // 17
+            "4.3",   // 18
+            "4.4",   // 19
+            "4.4W",  // 20
+            "5.0"    // 21
     };
 
     public static String getAndroidVersionName(int sdkLevel) {
@@ -248,13 +248,13 @@ public final class Utils {
 
             input = new FileReader(file);
             int numRead = input.read(buffer);
-            while(numRead != -1) {
+            while (numRead != -1) {
 
                 for (char c : buffer) {
                     if (c == substring.charAt(currentSubstringIndex)) {
-                        currentSubstringIndex ++;
+                        currentSubstringIndex++;
                         if (currentSubstringIndex == substring.length()) {
-                            count ++;
+                            count++;
                             currentSubstringIndex = 0;
                         }
                     } else {
@@ -476,7 +476,7 @@ public final class Utils {
 
         @Override
         public void handleTag(boolean opening, String tag, Editable output,
-                XMLReader reader) {
+                              XMLReader reader) {
             if (tag.equals("ul")) {
                 if (opening)
                     listNum = -1;

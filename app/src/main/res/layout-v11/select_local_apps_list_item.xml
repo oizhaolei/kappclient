@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2010 The Android Open Source Project
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -19,7 +18,7 @@
     android:background="?android:attr/activatedBackgroundIndicator"
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:paddingBottom="2dip"
-    android:paddingTop="2dip" >
+    android:paddingTop="2dip">
 
     <ImageView
         android:layout_width="48dip"
@@ -32,7 +31,7 @@
     <TwoLineListItem
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:mode="twoLine" >
+        android:mode="twoLine">
 
         <TextView
             android:id="@+id/application_label"

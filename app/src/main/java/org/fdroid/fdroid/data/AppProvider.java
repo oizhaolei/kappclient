@@ -25,10 +25,11 @@ public class AppProvider extends FDroidProvider {
 
     public static final class Helper {
 
-        private Helper() {}
+        private Helper() {
+        }
 
         public static int count(Context context, Uri uri) {
-            String[] projection = new String[] { DataColumns._COUNT };
+            String[] projection = new String[]{DataColumns._COUNT};
             Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
             int count = 0;
             if (cursor != null && cursor.getCount() == 1) {
@@ -86,7 +87,7 @@ public class AppProvider extends FDroidProvider {
         public static List<String> categories(Context context) {
             ContentResolver resolver = context.getContentResolver();
             Uri uri = getContentUri();
-            String[] projection = { DataColumns.CATEGORIES };
+            String[] projection = {DataColumns.CATEGORIES};
             Cursor cursor = resolver.query(uri, projection, null, null, null);
             Set<String> categorySet = new HashSet<String>();
             if (cursor != null) {
@@ -242,6 +243,7 @@ public class AppProvider extends FDroidProvider {
          * Tells the query selection that it will need to join onto the installed apps table
          * when used. This should be called when your query makes use of fields from that table
          * (for example, list all installed, or list those which can be updated).
+         *
          * @return A reference to this object, to allow method chaining, for example
          * <code>return new AppQuerySelection(selection).requiresInstalledTable())</code>
          */
@@ -289,9 +291,9 @@ public class AppProvider extends FDroidProvider {
         public void naturalJoinToInstalledTable() {
             if (!requiresInstalledTable) {
                 join(
-                    DBHelper.TABLE_INSTALLED_APP,
-                    "installed",
-                    "installed." + InstalledAppProvider.DataColumns.APP_ID + " = " + DBHelper.TABLE_APP + ".id");
+                        DBHelper.TABLE_INSTALLED_APP,
+                        "installed",
+                        "installed." + InstalledAppProvider.DataColumns.APP_ID + " = " + DBHelper.TABLE_APP + ".id");
                 requiresInstalledTable = true;
             }
         }
@@ -299,9 +301,9 @@ public class AppProvider extends FDroidProvider {
         public void leftJoinToInstalledTable() {
             if (!requiresInstalledTable) {
                 leftJoin(
-                    DBHelper.TABLE_INSTALLED_APP,
-                    "installed",
-                    "installed." + InstalledAppProvider.DataColumns.APP_ID + " = " + DBHelper.TABLE_APP + ".id");
+                        DBHelper.TABLE_INSTALLED_APP,
+                        "installed",
+                        "installed." + InstalledAppProvider.DataColumns.APP_ID + " = " + DBHelper.TABLE_APP + ".id");
                 requiresInstalledTable = true;
             }
         }
@@ -338,9 +340,9 @@ public class AppProvider extends FDroidProvider {
             if (!isSuggestedApkTableAdded) {
                 isSuggestedApkTableAdded = true;
                 leftJoin(
-                    DBHelper.TABLE_APK,
-                    "suggestedApk",
-                    "fdroid_app.suggestedVercode = suggestedApk.vercode AND fdroid_app.id = suggestedApk.id");
+                        DBHelper.TABLE_APK,
+                        "suggestedApk",
+                        "fdroid_app.suggestedVercode = suggestedApk.vercode AND fdroid_app.id = suggestedApk.id");
             }
             appendField(fieldName, "suggestedApk", alias);
         }
@@ -380,15 +382,15 @@ public class AppProvider extends FDroidProvider {
     private static final String PATH_IGNORED = "ignored";
     private static final String PATH_CALC_APP_DETAILS_FROM_INDEX = "calcDetailsFromIndex";
 
-    private static final int CAN_UPDATE       = CODE_SINGLE + 1;
-    private static final int INSTALLED        = CAN_UPDATE + 1;
-    private static final int SEARCH           = INSTALLED + 1;
-    private static final int NO_APKS          = SEARCH + 1;
-    private static final int APPS             = NO_APKS + 1;
+    private static final int CAN_UPDATE = CODE_SINGLE + 1;
+    private static final int INSTALLED = CAN_UPDATE + 1;
+    private static final int SEARCH = INSTALLED + 1;
+    private static final int NO_APKS = SEARCH + 1;
+    private static final int APPS = NO_APKS + 1;
     private static final int RECENTLY_UPDATED = APPS + 1;
-    private static final int NEWLY_ADDED      = RECENTLY_UPDATED + 1;
-    private static final int CATEGORY         = NEWLY_ADDED + 1;
-    private static final int IGNORED          = CATEGORY + 1;
+    private static final int NEWLY_ADDED = RECENTLY_UPDATED + 1;
+    private static final int CATEGORY = NEWLY_ADDED + 1;
+    private static final int IGNORED = CATEGORY + 1;
     private static final int CALC_APP_DETAILS_FROM_INDEX = IGNORED + 1;
 
     static {
@@ -428,9 +430,9 @@ public class AppProvider extends FDroidProvider {
 
     public static Uri getCategoryUri(String category) {
         return getContentUri().buildUpon()
-            .appendPath(PATH_CATEGORY)
-            .appendPath(category)
-            .build();
+                .appendPath(PATH_CATEGORY)
+                .appendPath(category)
+                .build();
     }
 
     public static Uri getNoApksUri() {
@@ -447,16 +449,16 @@ public class AppProvider extends FDroidProvider {
 
     public static Uri getContentUri(List<App> apps) {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < apps.size(); i ++) {
+        for (int i = 0; i < apps.size(); i++) {
             if (i != 0) {
                 builder.append(',');
             }
             builder.append(apps.get(i).id);
         }
         return getContentUri().buildUpon()
-            .appendPath(PATH_APPS)
-            .appendPath(builder.toString())
-            .build();
+                .appendPath(PATH_APPS)
+                .appendPath(builder.toString())
+                .build();
     }
 
     public static Uri getContentUri(App app) {
@@ -469,9 +471,9 @@ public class AppProvider extends FDroidProvider {
 
     public static Uri getSearchUri(String query) {
         return getContentUri().buildUpon()
-            .appendPath(PATH_SEARCH)
-            .appendPath(query)
-            .build();
+                .appendPath(PATH_SEARCH)
+                .appendPath(query)
+                .build();
     }
 
     @Override
@@ -509,16 +511,16 @@ public class AppProvider extends FDroidProvider {
         keywords = "%" + keywords + "%";
         String selection =
                 "fdroid_app.id like ? OR " +
-                "fdroid_app.name like ? OR " +
-                "fdroid_app.summary like ? OR " +
-                "fdroid_app.description like ? ";
-        String[] args = new String[] { keywords, keywords, keywords, keywords};
+                        "fdroid_app.name like ? OR " +
+                        "fdroid_app.summary like ? OR " +
+                        "fdroid_app.description like ? ";
+        String[] args = new String[]{keywords, keywords, keywords, keywords};
         return new AppQuerySelection(selection, args);
     }
 
     private AppQuerySelection querySingle(String id) {
         String selection = "fdroid_app.id = ?";
-        String[] args = { id };
+        String[] args = {id};
         return new AppQuerySelection(selection, args);
     }
 
@@ -530,13 +532,13 @@ public class AppProvider extends FDroidProvider {
 
     private AppQuerySelection queryNewlyAdded() {
         String selection = "fdroid_app.added > ?";
-        String[] args = { Utils.DATE_FORMAT.format(Preferences.get().calcMaxHistory()) };
+        String[] args = {Utils.DATE_FORMAT.format(Preferences.get().calcMaxHistory())};
         return new AppQuerySelection(selection, args);
     }
 
     private AppQuerySelection queryRecentlyUpdated() {
         String selection = "fdroid_app.added != fdroid_app.lastUpdated AND fdroid_app.lastUpdated > ?";
-        String[] args = { Utils.DATE_FORMAT.format(Preferences.get().calcMaxHistory()) };
+        String[] args = {Utils.DATE_FORMAT.format(Preferences.get().calcMaxHistory())};
         return new AppQuerySelection(selection, args);
     }
 
@@ -545,9 +547,9 @@ public class AppProvider extends FDroidProvider {
         // so we can join onto it.
         String selection =
                 " fdroid_app.categories = ? OR " +    // Only category e.g. "internet"
-                " fdroid_app.categories LIKE ? OR " + // First category e.g. "internet,%"
-                " fdroid_app.categories LIKE ? OR " + // Last category e.g. "%,internet"
-                " fdroid_app.categories LIKE ? ";     // One of many categories e.g. "%,internet,%"
+                        " fdroid_app.categories LIKE ? OR " + // First category e.g. "internet,%"
+                        " fdroid_app.categories LIKE ? OR " + // Last category e.g. "%,internet"
+                        " fdroid_app.categories LIKE ? ";     // One of many categories e.g. "%,internet,%"
         String[] args = {
                 category,
                 category + ",%",
@@ -701,33 +703,33 @@ public class AppProvider extends FDroidProvider {
      * with the closest version code to that, without going over.
      * If the app is not compatible at all (i.e. no versions were compatible)
      * then we take the highest, otherwise we take the highest compatible version.
-     *
+     * <p/>
      * Replaces the existing Java code:
-     *
+     * <p/>
      * if (app.upstreamVercode > 0) {
-     *     int latestcode = -1;
-     *     for (Apk apk : apksForApp) {
-     *         if ((!app.compatible || apk.compatible)
-     *                 && apk.vercode <= app.upstreamVercode
-     *                 && apk.vercode > latestcode) {
-     *             latestApk = apk;
-     *             latestcode = apk.vercode;
-     *         }
-     *     }
+     * int latestcode = -1;
+     * for (Apk apk : apksForApp) {
+     * if ((!app.compatible || apk.compatible)
+     * && apk.vercode <= app.upstreamVercode
+     * && apk.vercode > latestcode) {
+     * latestApk = apk;
+     * latestcode = apk.vercode;
      * }
-     *
+     * }
+     * }
+     * <p/>
      * And it can be read a little easier like this (without the string concats):
-     *
-     *   UPDATE fdroid_app
-     *   SET suggestedVercode = (
-     *       SELECT MAX(fdroid_apk.vercode)
-     *       FROM fdroid_apk
-     *       WHERE
-     *           fdroid_app.id = fdroid_apk.id AND
-     *           fdroid_apk.vercode <= fdroid_app.upstreamVercode AND
-     *           ( fdroid_app.compatible = 0 OR fdroid_apk.compatible = 1 )
-     *   )
-     *   WHERE upstreamVercode > 0
+     * <p/>
+     * UPDATE fdroid_app
+     * SET suggestedVercode = (
+     * SELECT MAX(fdroid_apk.vercode)
+     * FROM fdroid_apk
+     * WHERE
+     * fdroid_app.id = fdroid_apk.id AND
+     * fdroid_apk.vercode <= fdroid_app.upstreamVercode AND
+     * ( fdroid_app.compatible = 0 OR fdroid_apk.compatible = 1 )
+     * )
+     * WHERE upstreamVercode > 0
      */
     private void updateSuggestedFromUpstream() {
 
@@ -737,15 +739,15 @@ public class AppProvider extends FDroidProvider {
         final String app = DBHelper.TABLE_APP;
 
         String updateSql =
-            "UPDATE " + app +
-            " SET suggestedVercode = ( " +
-                " SELECT MAX( " + apk + ".vercode ) " +
-                " FROM " + apk +
-                " WHERE " +
-                    app + ".id = " + apk + ".id AND " +
-                    apk + ".vercode <= " + app + ".upstreamVercode AND " +
-                    " ( " + app + ".compatible = 0 OR " + apk + ".compatible = 1 ) ) " +
-            " WHERE upstreamVercode > 0 ";
+                "UPDATE " + app +
+                        " SET suggestedVercode = ( " +
+                        " SELECT MAX( " + apk + ".vercode ) " +
+                        " FROM " + apk +
+                        " WHERE " +
+                        app + ".id = " + apk + ".id AND " +
+                        apk + ".vercode <= " + app + ".upstreamVercode AND " +
+                        " ( " + app + ".compatible = 0 OR " + apk + ".compatible = 1 ) ) " +
+                        " WHERE upstreamVercode > 0 ";
 
         write().execSQL(updateSql);
     }
@@ -753,13 +755,13 @@ public class AppProvider extends FDroidProvider {
     /**
      * For each app, we want to set the isCompatible flag to 1 if any of the apks we know
      * about are compatible, and 0 otherwise.
-     *
+     * <p/>
      * Here is the SQL query without all of the concatenations (hopefully it's a bit easier to read):
-     *
-     *  UPDATE fdroid_app SET compatible = (
-     *      SELECT TOTAL( fdroid_apk.compatible ) > 0
-     *      FROM fdroid_apk
-     *      WHERE fdroid_apk.id = fdroid_app.id );
+     * <p/>
+     * UPDATE fdroid_app SET compatible = (
+     * SELECT TOTAL( fdroid_apk.compatible ) > 0
+     * FROM fdroid_apk
+     * WHERE fdroid_apk.id = fdroid_app.id );
      */
     private void updateCompatibleFlags() {
 
@@ -769,10 +771,10 @@ public class AppProvider extends FDroidProvider {
         final String app = DBHelper.TABLE_APP;
 
         String updateSql =
-            "UPDATE " + app + " SET compatible = ( " +
-                " SELECT TOTAL( " + apk + ".compatible ) > 0 " +
-                " FROM " + apk +
-                " WHERE " + apk + ".id = " + app + ".id );";
+                "UPDATE " + app + " SET compatible = ( " +
+                        " SELECT TOTAL( " + apk + ".compatible ) > 0 " +
+                        " FROM " + apk +
+                        " WHERE " + apk + ".id = " + app + ".id );";
 
         write().execSQL(updateSql);
     }
@@ -782,28 +784,28 @@ public class AppProvider extends FDroidProvider {
      * latest apk in the repo. If the app is not compatible at all (i.e. no versions
      * were compatible) then we take the highest, otherwise we take the highest
      * compatible version.
-     *
+     * <p/>
      * Replaces the existing Java code:
-     *
+     * <p/>
      * for (Apk apk : apksForApp) {
-     *     if ((!app.compatible || apk.compatible)
-     *             && apk.vercode > latestCode) {
-     *         latestApk = apk;
-     *         latestCode = apk.vercode;
-     *     }
+     * if ((!app.compatible || apk.compatible)
+     * && apk.vercode > latestCode) {
+     * latestApk = apk;
+     * latestCode = apk.vercode;
      * }
-     *
+     * }
+     * <p/>
      * And it can be read a little easier like this (without the string concats):
-     *
-     *  UPDATE fdroid_app
-     *  SET suggestedVercode = (
-     *      SELECT MAX(fdroid_apk.vercode)
-     *      FROM fdroid_apk
-     *      WHERE
-     *          fdroid_app.id = fdroid_apk.id AND
-     *          ( fdroid_app.compatible = 0 OR fdroid_apk.compatible = 1 )
-     *  )
-     *  WHERE upstreamVercode = 0 OR upstreamVercode IS NULL;
+     * <p/>
+     * UPDATE fdroid_app
+     * SET suggestedVercode = (
+     * SELECT MAX(fdroid_apk.vercode)
+     * FROM fdroid_apk
+     * WHERE
+     * fdroid_app.id = fdroid_apk.id AND
+     * ( fdroid_app.compatible = 0 OR fdroid_apk.compatible = 1 )
+     * )
+     * WHERE upstreamVercode = 0 OR upstreamVercode IS NULL;
      */
     private void updateSuggestedFromLatest() {
 
@@ -813,14 +815,14 @@ public class AppProvider extends FDroidProvider {
         final String app = DBHelper.TABLE_APP;
 
         String updateSql =
-            "UPDATE " + app +
-            " SET suggestedVercode = ( " +
-                " SELECT MAX( " + apk + ".vercode ) " +
-                " FROM " + apk +
-                " WHERE " +
-                    app + ".id = " + apk + ".id AND " +
-                    " ( " + app + ".compatible = 0 OR " + apk + ".compatible = 1 ) ) " +
-            " WHERE upstreamVercode = 0 OR upstreamVercode IS NULL ";
+                "UPDATE " + app +
+                        " SET suggestedVercode = ( " +
+                        " SELECT MAX( " + apk + ".vercode ) " +
+                        " FROM " + apk +
+                        " WHERE " +
+                        app + ".id = " + apk + ".id AND " +
+                        " ( " + app + ".compatible = 0 OR " + apk + ".compatible = 1 ) ) " +
+                        " WHERE upstreamVercode = 0 OR upstreamVercode IS NULL ";
 
         write().execSQL(updateSql);
     }
@@ -829,17 +831,17 @@ public class AppProvider extends FDroidProvider {
 
         Log.d("FDroid", "Updating icon paths for apps belonging to repos with version >= " + Repo.VERSION_DENSITY_SPECIFIC_ICONS);
         String iconsDir = Utils.getIconsDir(getContext());
-        Log.d("FDroid", "Using icon dir '"+iconsDir+"'");
+        Log.d("FDroid", "Using icon dir '" + iconsDir + "'");
         String repoVersion = Integer.toString(Repo.VERSION_DENSITY_SPECIFIC_ICONS);
         String query = getIconUpdateQuery();
-        String[] params = { repoVersion, iconsDir };
+        String[] params = {repoVersion, iconsDir};
         write().execSQL(query, params);
     }
 
     /**
      * Returns a query which requires two parameters to be bound. These are (in order):
-     *  1) The repo version that introduced density specific icons
-     *  2) The dir to density specific icons for the current device.
+     * 1) The repo version that introduced density specific icons
+     * 2) The dir to density specific icons for the current device.
      */
     private String getIconUpdateQuery() {
 
@@ -848,12 +850,12 @@ public class AppProvider extends FDroidProvider {
         final String repo = DBHelper.TABLE_REPO;
 
         return
-            " UPDATE " + app + " SET iconUrl = ( " +
-                " SELECT " +
+                " UPDATE " + app + " SET iconUrl = ( " +
+                        " SELECT " +
 
-                    // Concatenate (using the "||" operator) the address, the icons directory (bound to the ? as the
-                    // second parameter when executing the query) and the icon path.
-                    " ( " +
+                        // Concatenate (using the "||" operator) the address, the icons directory (bound to the ? as the
+                        // second parameter when executing the query) and the icon path.
+                        " ( " +
                         repo + ".address " +
                         " || " +
 
@@ -863,13 +865,13 @@ public class AppProvider extends FDroidProvider {
 
                         " || " +
                         app + ".icon " +
-                    ") " +
-                " FROM " +
-                    apk +
-                    " JOIN " + repo + " ON (" + repo + "._id = " + apk + ".repo) " +
-                " WHERE " +
-                    app + ".id = " + apk + ".id AND " +
-                    apk + ".vercode = ( " +
+                        ") " +
+                        " FROM " +
+                        apk +
+                        " JOIN " + repo + " ON (" + repo + "._id = " + apk + ".repo) " +
+                        " WHERE " +
+                        app + ".id = " + apk + ".id AND " +
+                        apk + ".vercode = ( " +
 
                         // We only want the latest apk here. Ideally, we should instead join
                         // onto apk.suggestedVercode, but as per https://gitlab.com/fdroid/fdroidclient/issues/1
@@ -879,8 +881,8 @@ public class AppProvider extends FDroidProvider {
                         " SELECT MAX(inner_apk.vercode)  " +
                         " FROM fdroid_apk as inner_apk " +
                         " WHERE inner_apk.id = fdroid_apk.id ) " +
-                    " AND fdroid_apk.repo = fdroid_repo._id " +
-            " ) ";
+                        " AND fdroid_apk.repo = fdroid_repo._id " +
+                        " ) ";
     }
 
 }

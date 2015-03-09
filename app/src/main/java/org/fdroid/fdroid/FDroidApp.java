@@ -48,6 +48,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.ruptech.k_app.R;
+import com.ruptech.k_app.http.HttpServer;
+import com.ruptech.k_app.utils.AssetsPropertyReader;
 
 import org.fdroid.fdroid.Preferences.ChangeListener;
 import org.fdroid.fdroid.compat.PRNGFixes;
@@ -60,6 +62,7 @@ import org.fdroid.fdroid.net.WifiStateChangeService;
 
 import java.io.File;
 import java.security.Security;
+import java.util.Properties;
 import java.util.Set;
 
 public class FDroidApp extends Application {
@@ -125,16 +128,29 @@ public class FDroidApp extends Application {
             Security.addProvider(spongyCastleProvider);
         }
     }
+    static public Properties properties;
 
     public static void disableSpongyCastleOnLollipop() {
         if (Build.VERSION.SDK_INT == 21) {
             Security.removeProvider(spongyCastleProvider.getName());
         }
     }
+    private static HttpServer httpServer;
+
+    public static HttpServer getHttpServer() {
+        if (httpServer == null) {
+            httpServer = new HttpServer();
+        }
+        return httpServer;
+    }
+
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        AssetsPropertyReader assetsPropertyReader = new AssetsPropertyReader(this);
+        properties = assetsPropertyReader.getProperties("env.properties");
 
         // Needs to be setup before anything else tries to access it.
         // Perhaps the constructor is a better place, but then again,
@@ -189,23 +205,24 @@ public class FDroidApp extends Application {
         bluetoothAdapter = getBluetoothAdapter();
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-            .imageDownloader(new IconDownloader(getApplicationContext()))
-            .diskCache(new LimitedAgeDiscCache(
-                        new File(StorageUtils.getCacheDirectory(getApplicationContext(), true),
-                            "icons"),
-                        null,
-                        new FileNameGenerator() {
-                            @Override
-                            public String generate(String imageUri) {
-                                return imageUri.substring(
-                                    imageUri.lastIndexOf('/') + 1);
-                            } },
-                        // 30 days in secs: 30*24*60*60 = 2592000
-                        2592000)
-                    )
-            .threadPoolSize(4)
-            .threadPriority(Thread.NORM_PRIORITY - 2) // Default is NORM_PRIORITY - 1
-            .build();
+                .imageDownloader(new IconDownloader(getApplicationContext()))
+                .diskCache(new LimitedAgeDiscCache(
+                                new File(StorageUtils.getCacheDirectory(getApplicationContext(), true),
+                                        "icons"),
+                                null,
+                                new FileNameGenerator() {
+                                    @Override
+                                    public String generate(String imageUri) {
+                                        return imageUri.substring(
+                                                imageUri.lastIndexOf('/') + 1);
+                                    }
+                                },
+                                // 30 days in secs: 30*24*60*60 = 2592000
+                                2592000)
+                )
+                .threadPoolSize(4)
+                .threadPriority(Thread.NORM_PRIORITY - 2) // Default is NORM_PRIORITY - 1
+                .build();
         ImageLoader.getInstance().init(config);
 
         // TODO reintroduce PinningTrustManager and MemorizingTrustManager

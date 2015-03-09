@@ -15,8 +15,8 @@ import java.util.List;
 
 public class TabManager {
 
-    public static final int INDEX_AVAILABLE  = 0;
-    public static final int INDEX_INSTALLED  = 1;
+    public static final int INDEX_AVAILABLE = 0;
+    public static final int INDEX_INSTALLED = 1;
     public static final int INDEX_CAN_UPDATE = 2;
 
     private ViewPager pager;
@@ -44,29 +44,29 @@ public class TabManager {
 
     public void createTabs() {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        for (int i = 0; i < pager.getAdapter().getCount(); i ++) {
+        for (int i = 0; i < pager.getAdapter().getCount(); i++) {
             CharSequence label = pager.getAdapter().getPageTitle(i);
             actionBar.addTab(
-                actionBar.newTab()
-                    .setText(label)
-                    .setTabListener(new ActionBar.TabListener() {
-                        @Override
-                        public void onTabSelected(ActionBar.Tab tab,
-                                                  FragmentTransaction ft) {
-                            int pos = tab.getPosition();
-                            pager.setCurrentItem(pos);
-                            if (pos == INDEX_CAN_UPDATE)
-                                removeNotification(1);
-                        }
+                    actionBar.newTab()
+                            .setText(label)
+                            .setTabListener(new ActionBar.TabListener() {
+                                @Override
+                                public void onTabSelected(ActionBar.Tab tab,
+                                                          FragmentTransaction ft) {
+                                    int pos = tab.getPosition();
+                                    pager.setCurrentItem(pos);
+                                    if (pos == INDEX_CAN_UPDATE)
+                                        removeNotification(1);
+                                }
 
-                        @Override
-                        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-                        }
+                                @Override
+                                public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+                                }
 
-                        @Override
-                        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-                        }
-                    }));
+                                @Override
+                                public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+                                }
+                            }));
         }
     }
 

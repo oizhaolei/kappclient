@@ -76,7 +76,7 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
     private boolean compactLayout = DEFAULT_COMPACT_LAYOUT;
     private boolean filterAppsRequiringRoot = DEFAULT_ROOTED;
 
-    private Map<String,Boolean> initialized = new HashMap<String,Boolean>();
+    private Map<String, Boolean> initialized = new HashMap<String, Boolean>();
 
     private List<ChangeListener> compactLayoutListeners = new ArrayList<ChangeListener>();
     private List<ChangeListener> filterAppsRequiringRootListeners = new ArrayList<ChangeListener>();
@@ -225,7 +225,7 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
         uninitialize(key);
 
         if (key.equals(PREF_COMPACT_LAYOUT)) {
-            for (ChangeListener listener : compactLayoutListeners)  {
+            for (ChangeListener listener : compactLayoutListeners) {
                 listener.onPreferenceChange();
             }
         } else if (key.equals(PREF_ROOTED)) {

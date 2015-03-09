@@ -58,13 +58,13 @@ public class SignedRepoUpdater extends RepoUpdater {
     }
 
     protected File extractIndexFromJar(File indexJar) throws UpdateException {
-        File indexFile  = null;
+        File indexFile = null;
         JarFile jarFile = null;
         try {
             jarFile = new JarFile(indexJar, true);
-            JarEntry indexEntry = (JarEntry)jarFile.getEntry("index.xml");
+            JarEntry indexEntry = (JarEntry) jarFile.getEntry("index.xml");
 
-            indexFile  = File.createTempFile("index-", ".xml", context.getFilesDir());
+            indexFile = File.createTempFile("index-", ".xml", context.getFilesDir());
             InputStream input = null;
             OutputStream output = null;
             try {
@@ -124,8 +124,8 @@ public class SignedRepoUpdater extends RepoUpdater {
         Log.d(TAG, "Getting signed index from " + repo.address + " at " +
                 Utils.LOG_DATE_FORMAT.format(updateTime));
 
-        File indexJar  = downloadedFile;
-        File indexXml  = null;
+        File indexJar = downloadedFile;
+        File indexXml = null;
 
         // Don't worry about checking the status code for 200. If it was a
         // successful download, then we will have a file ready to use:

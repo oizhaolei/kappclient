@@ -117,7 +117,7 @@ abstract public class AppListFragment extends ThemeableListFragment implements
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final App app = new App((Cursor)getListView().getItemAtPosition(position));
+        final App app = new App((Cursor) getListView().getItemAtPosition(position));
         Intent intent = new Intent(getActivity(), AppDetails.class);
         intent.putExtra(AppDetails.EXTRA_APPID, app.id);
         intent.putExtra(AppDetails.EXTRA_FROM, getFromTitle());

@@ -41,13 +41,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ruptech.k_app.R;
 
 import org.fdroid.fdroid.compat.TabManager;
 import org.fdroid.fdroid.data.AppProvider;
-import org.fdroid.fdroid.data.NewRepoConfig;
 import org.fdroid.fdroid.views.AppListFragmentPagerAdapter;
 import org.fdroid.fdroid.views.ManageReposActivity;
 
@@ -198,7 +196,7 @@ public class FDroid extends ActionBarActivity {
                     p = new Builder(
                             new ContextThemeWrapper(
                                     this, R.style.AboutDialogLight)
-                            ).setView(view);
+                    ).setView(view);
                 }
                 final AlertDialog alrt = p.create();
                 alrt.setIcon(R.drawable.ic_launcher);
@@ -208,7 +206,7 @@ public class FDroid extends ActionBarActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog,
-                                    int whichButton) {
+                                                int whichButton) {
                                 Uri uri = Uri.parse("https://f-droid.org");
                                 startActivity(new Intent(Intent.ACTION_VIEW, uri));
                             }
@@ -217,7 +215,7 @@ public class FDroid extends ActionBarActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog,
-                                    int whichButton) {
+                                                int whichButton) {
                             }
                         });
                 alrt.show();
@@ -230,58 +228,58 @@ public class FDroid extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         switch (requestCode) {
-        case REQUEST_APPDETAILS:
-            break;
-        case REQUEST_MANAGEREPOS:
-            if (data != null && data.hasExtra(ManageReposActivity.REQUEST_UPDATE)) {
-                Builder ask_alrt = new Builder(this);
-                ask_alrt.setTitle(getString(R.string.repo_update_title));
-                ask_alrt.setIcon(android.R.drawable.ic_menu_rotate);
-                ask_alrt.setMessage(getString(R.string.repo_alrt));
-                ask_alrt.setPositiveButton(getString(R.string.yes),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                    int whichButton) {
-                                updateRepos();
-                            }
-                        });
-                ask_alrt.setNegativeButton(getString(R.string.no),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                    int whichButton) {
-                                // do nothing
-                            }
-                        });
-                AlertDialog alert = ask_alrt.create();
-                alert.show();
-            }
-            break;
-        case REQUEST_PREFS:
-            // The automatic update settings may have changed, so reschedule (or
-            // unschedule) the service accordingly. It's cheap, so no need to
-            // check if the particular setting has actually been changed.
-            UpdateService.schedule(getBaseContext());
+            case REQUEST_APPDETAILS:
+                break;
+            case REQUEST_MANAGEREPOS:
+                if (data != null && data.hasExtra(ManageReposActivity.REQUEST_UPDATE)) {
+                    Builder ask_alrt = new Builder(this);
+                    ask_alrt.setTitle(getString(R.string.repo_update_title));
+                    ask_alrt.setIcon(android.R.drawable.ic_menu_rotate);
+                    ask_alrt.setMessage(getString(R.string.repo_alrt));
+                    ask_alrt.setPositiveButton(getString(R.string.yes),
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int whichButton) {
+                                    updateRepos();
+                                }
+                            });
+                    ask_alrt.setNegativeButton(getString(R.string.no),
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog,
+                                                    int whichButton) {
+                                    // do nothing
+                                }
+                            });
+                    AlertDialog alert = ask_alrt.create();
+                    alert.show();
+                }
+                break;
+            case REQUEST_PREFS:
+                // The automatic update settings may have changed, so reschedule (or
+                // unschedule) the service accordingly. It's cheap, so no need to
+                // check if the particular setting has actually been changed.
+                UpdateService.schedule(getBaseContext());
 
-            if ((resultCode & PreferencesActivity.RESULT_RESTART) != 0) {
-                ((FDroidApp) getApplication()).reloadTheme();
-                final Intent intent = getIntent();
-                overridePendingTransition(0, 0);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                finish();
-                overridePendingTransition(0, 0);
-                startActivity(intent);
-            }
-            break;
-        case REQUEST_ENABLE_BLUETOOTH:
-            fdroidApp.sendViaBluetooth(this, resultCode, "org.fdroid.fdroid");
-            break;
+                if ((resultCode & PreferencesActivity.RESULT_RESTART) != 0) {
+                    ((FDroidApp) getApplication()).reloadTheme();
+                    final Intent intent = getIntent();
+                    overridePendingTransition(0, 0);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    finish();
+                    overridePendingTransition(0, 0);
+                    startActivity(intent);
+                }
+                break;
+            case REQUEST_ENABLE_BLUETOOTH:
+                fdroidApp.sendViaBluetooth(this, resultCode, "org.fdroid.fdroid");
+                break;
         }
     }
 
     private void createViews() {
-        viewPager = (ViewPager)findViewById(R.id.main_pager);
+        viewPager = (ViewPager) findViewById(R.id.main_pager);
         AppListFragmentPagerAdapter viewPagerAdapter = new AppListFragmentPagerAdapter(this);
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -333,7 +331,7 @@ public class FDroid extends ActionBarActivity {
 
     public void removeNotification(int id) {
         NotificationManager nMgr = (NotificationManager) getBaseContext()
-            .getSystemService(Context.NOTIFICATION_SERVICE);
+                .getSystemService(Context.NOTIFICATION_SERVICE);
         nMgr.cancel(id);
     }
 

@@ -104,7 +104,7 @@ abstract public class Installer {
      * @throws org.fdroid.fdroid.installer.Installer.AndroidNotCompatibleException
      */
     public static Installer getActivityInstaller(Activity activity, PackageManager pm,
-            InstallerCallback callback) {
+                                                 InstallerCallback callback) {
 
         // if root installer has been activated in preferences -> RootInstaller
         boolean isRootInstallerEnabled = Preferences.get().isRootInstallerEnabled();
@@ -160,7 +160,7 @@ abstract public class Installer {
     }
 
     public static Installer getUnattendedInstaller(Context context, PackageManager pm,
-            InstallerCallback callback) throws AndroidNotCompatibleException {
+                                                   InstallerCallback callback) throws AndroidNotCompatibleException {
 
         // if root installer has been activated in preferences -> RootInstaller
         boolean useRootInstaller = Preferences.get().isRootInstallerEnabled();
@@ -188,7 +188,7 @@ abstract public class Installer {
                 pm.checkPermission(permission.DELETE_PACKAGES, context.getPackageName());
         boolean permissionsGranted =
                 (checkInstallPermission == PackageManager.PERMISSION_GRANTED
-                && checkDeletePermission == PackageManager.PERMISSION_GRANTED);
+                        && checkDeletePermission == PackageManager.PERMISSION_GRANTED);
 
         return permissionsGranted;
     }

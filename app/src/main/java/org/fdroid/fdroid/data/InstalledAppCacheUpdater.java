@@ -27,7 +27,7 @@ public class InstalledAppCacheUpdater {
     private Context context;
 
     private List<PackageInfo> toInsert = new ArrayList<PackageInfo>();
-    private List<String>      toDelete = new ArrayList<String>();
+    private List<String> toDelete = new ArrayList<String>();
 
     protected InstalledAppCacheUpdater(Context context) {
         this.context = context;
@@ -132,12 +132,12 @@ public class InstalledAppCacheUpdater {
             Uri uri = InstalledAppProvider.getContentUri();
             for (PackageInfo info : appsToInsert) {
                 ContentProviderOperation op = ContentProviderOperation.newInsert(uri)
-                    .withValue(InstalledAppProvider.DataColumns.APP_ID, info.packageName)
-                    .withValue(InstalledAppProvider.DataColumns.VERSION_CODE, info.versionCode)
-                    .withValue(InstalledAppProvider.DataColumns.VERSION_NAME, info.versionName)
-                    .withValue(InstalledAppProvider.DataColumns.APPLICATION_LABEL,
-                            InstalledAppProvider.getApplicationLabel(context, info.packageName))
-                    .build();
+                        .withValue(InstalledAppProvider.DataColumns.APP_ID, info.packageName)
+                        .withValue(InstalledAppProvider.DataColumns.VERSION_CODE, info.versionCode)
+                        .withValue(InstalledAppProvider.DataColumns.VERSION_NAME, info.versionName)
+                        .withValue(InstalledAppProvider.DataColumns.APPLICATION_LABEL,
+                                InstalledAppProvider.getApplicationLabel(context, info.packageName))
+                        .build();
                 ops.add(op);
             }
         }

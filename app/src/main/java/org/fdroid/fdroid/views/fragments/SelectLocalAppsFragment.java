@@ -74,11 +74,11 @@ public class SelectLocalAppsFragment extends ListFragment
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
                 R.layout.select_local_apps_list_item,
                 null,
-                new String[] {
+                new String[]{
                         DataColumns.APPLICATION_LABEL,
                         DataColumns.APP_ID,
                 },
-                new int[] {
+                new int[]{
                         R.id.application_label,
                         R.id.package_name,
                 },

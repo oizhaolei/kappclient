@@ -37,7 +37,7 @@ abstract class QueryBuilder {
     }
 
     protected final void appendField(String field, String tableAlias,
-                             String fieldAlias) {
+                                     String fieldAlias) {
 
         StringBuilder fieldBuilder = new StringBuilder();
 
@@ -72,22 +72,22 @@ abstract class QueryBuilder {
 
     private void joinWithType(String type, String table, String alias, String condition) {
         tables.append(' ')
-            .append(type)
-            .append(" JOIN ")
-            .append(table);
+                .append(type)
+                .append(" JOIN ")
+                .append(table);
 
         if (alias != null) {
             tables.append(" AS ").append(alias);
         }
 
         tables.append(" ON (")
-            .append(condition)
-            .append(')');
+                .append(condition)
+                .append(')');
     }
 
     private String fieldsSql() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < fields.size(); i ++) {
+        for (int i = 0; i < fields.size(); i++) {
             if (i > 0) {
                 sb.append(',');
             }

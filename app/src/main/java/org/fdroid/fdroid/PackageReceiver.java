@@ -31,6 +31,7 @@ import org.fdroid.fdroid.data.AppProvider;
 abstract class PackageReceiver extends BroadcastReceiver {
 
     abstract protected boolean toDiscard(Intent intent);
+
     abstract protected void handle(Context context, String appId);
 
     protected PackageInfo getPackageInfo(Context context, String appId) {

@@ -16,6 +16,7 @@ import android.util.Log;
 import org.fdroid.fdroid.AppFilter;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Utils;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -103,6 +104,10 @@ public class App extends ValueObject implements Comparable<App> {
     public int installedVersionCode;
 
     public Apk installedApk; // might be null if not installed
+
+    public App(JSONObject jo) {
+        //TODO
+    }
 
     @Override
     public int compareTo(App app) {

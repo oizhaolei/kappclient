@@ -23,7 +23,8 @@ public class RepoProvider extends FDroidProvider {
 
         public static final String TAG = "RepoProvider.Helper";
 
-        private Helper() {}
+        private Helper() {
+        }
 
         public static Repo findByUri(Context context, Uri uri) {
             ContentResolver resolver = context.getContentResolver();
@@ -71,7 +72,7 @@ public class RepoProvider extends FDroidProvider {
                                          String[] projection) {
             ContentResolver resolver = context.getContentResolver();
             Uri uri = RepoProvider.getContentUri();
-            String[] args = { fieldValue };
+            String[] args = {fieldValue};
             Cursor cursor = resolver.query(
                     uri, projection, fieldName + " = ?", args, null);
             return cursorToList(cursor);
@@ -152,12 +153,12 @@ public class RepoProvider extends FDroidProvider {
             if (values.containsKey(DataColumns.IN_USE)) {
                 Integer inUse = values.getAsInteger(DataColumns.IN_USE);
                 if (inUse != null && inUse == 0) {
-                    values.put(DataColumns.LAST_ETAG, (String)null);
+                    values.put(DataColumns.LAST_ETAG, (String) null);
                 }
             }
 
             Uri uri = getContentUri(repo.getId());
-            String[] args = { Long.toString(repo.getId()) };
+            String[] args = {Long.toString(repo.getId())};
             resolver.update(uri, values, DataColumns._ID + " = ?", args);
             repo.setValues(values);
         }
@@ -168,7 +169,7 @@ public class RepoProvider extends FDroidProvider {
          * each of the CRUD methods available in the helper class.
          */
         public static Uri insert(Context context,
-                                  ContentValues values) {
+                                 ContentValues values) {
             ContentResolver resolver = context.getContentResolver();
             Uri uri = RepoProvider.getContentUri();
             return resolver.insert(uri, values);
@@ -193,7 +194,7 @@ public class RepoProvider extends FDroidProvider {
 
         public static int countAppsForRepo(Context context, long repoId) {
             ContentResolver resolver = context.getContentResolver();
-            String[] projection = { ApkProvider.DataColumns._COUNT_DISTINCT_ID };
+            String[] projection = {ApkProvider.DataColumns._COUNT_DISTINCT_ID};
             Uri apkUri = ApkProvider.getRepoUri(repoId);
             Cursor cursor = resolver.query(apkUri, projection, null, null, null);
             int count = 0;
@@ -210,21 +211,21 @@ public class RepoProvider extends FDroidProvider {
 
     public interface DataColumns extends BaseColumns {
 
-        public static String ADDRESS      = "address";
-        public static String NAME         = "name";
-        public static String DESCRIPTION  = "description";
-        public static String IN_USE       = "inuse";
-        public static String PRIORITY     = "priority";
-        public static String PUBLIC_KEY   = "pubkey";
-        public static String FINGERPRINT  = "fingerprint";
-        public static String MAX_AGE      = "maxage";
-        public static String LAST_ETAG    = "lastetag";
+        public static String ADDRESS = "address";
+        public static String NAME = "name";
+        public static String DESCRIPTION = "description";
+        public static String IN_USE = "inuse";
+        public static String PRIORITY = "priority";
+        public static String PUBLIC_KEY = "pubkey";
+        public static String FINGERPRINT = "fingerprint";
+        public static String MAX_AGE = "maxage";
+        public static String LAST_ETAG = "lastetag";
         public static String LAST_UPDATED = "lastUpdated";
-        public static String VERSION      = "version";
+        public static String VERSION = "version";
 
         public static String[] ALL = {
-            _ID, ADDRESS, NAME, DESCRIPTION, IN_USE, PRIORITY, PUBLIC_KEY,
-            FINGERPRINT, MAX_AGE, LAST_UPDATED, LAST_ETAG, VERSION
+                _ID, ADDRESS, NAME, DESCRIPTION, IN_USE, PRIORITY, PUBLIC_KEY,
+                FINGERPRINT, MAX_AGE, LAST_UPDATED, LAST_ETAG, VERSION
         };
     }
 
@@ -271,7 +272,7 @@ public class RepoProvider extends FDroidProvider {
                 break;
 
             case CODE_SINGLE:
-                selection = ( selection == null ? "" : selection + " AND " ) +
+                selection = (selection == null ? "" : selection + " AND ") +
                         DataColumns._ID + " = " + uri.getLastPathSegment();
                 break;
 
@@ -332,7 +333,7 @@ public class RepoProvider extends FDroidProvider {
                 return 0;
 
             case CODE_SINGLE:
-                where = ( where == null ? "" : where + " AND " ) +
+                where = (where == null ? "" : where + " AND ") +
                         "_ID = " + uri.getLastPathSegment();
                 break;
 

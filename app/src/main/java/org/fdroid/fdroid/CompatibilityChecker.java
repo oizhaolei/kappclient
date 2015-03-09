@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 // Call getIncompatibleReasons(apk) on an instance of this class to
-    // find reasons why an apk may be incompatible with the user's device.
+// find reasons why an apk may be incompatible with the user's device.
 public class CompatibilityChecker extends Compatibility {
 
     private Context context;
@@ -80,9 +80,9 @@ public class CompatibilityChecker extends Compatibility {
 
         if (!hasApi(apk.minSdkVersion) || !upToApi(apk.maxSdkVersion)) {
             incompatibleReasons.add(
-                context.getResources().getString(
-                    R.string.minsdk_or_later,
-                    Utils.getAndroidVersionName(apk.minSdkVersion)));
+                    context.getResources().getString(
+                            R.string.minsdk_or_later,
+                            Utils.getAndroidVersionName(apk.minSdkVersion)));
         }
 
         if (apk.features != null) {

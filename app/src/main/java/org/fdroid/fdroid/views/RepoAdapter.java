@@ -62,7 +62,7 @@ public class RepoAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        CompoundButton switchView = (CompoundButton)view.findViewById(SWITCH_ID);
+        CompoundButton switchView = (CompoundButton) view.findViewById(SWITCH_ID);
 
         // Remove old listener (because we are reusing this view, we don't want
         // to invoke the listener for the last repo to use it - particularly
@@ -90,10 +90,10 @@ public class RepoAdapter extends CursorAdapter {
             }
         });
 
-        TextView nameView = (TextView)view.findViewById(R.id.repo_name);
+        TextView nameView = (TextView) view.findViewById(R.id.repo_name);
         nameView.setText(repo.getName());
         RelativeLayout.LayoutParams nameViewLayout =
-                (RelativeLayout.LayoutParams)nameView.getLayoutParams();
+                (RelativeLayout.LayoutParams) nameView.getLayoutParams();
         nameViewLayout.addRule(LayoutCompat.RelativeLayout.START_OF, switchView.getId());
 
         // If we set the signed view to GONE instead of INVISIBLE, then the
@@ -123,7 +123,7 @@ public class RepoAdapter extends CursorAdapter {
         layout.addRule(LayoutCompat.RelativeLayout.ALIGN_PARENT_END);
         layout.addRule(RelativeLayout.CENTER_VERTICAL);
         switchView.setLayoutParams(layout);
-        ((RelativeLayout)parent).addView(switchView);
+        ((RelativeLayout) parent).addView(switchView);
         return switchView;
     }
 }

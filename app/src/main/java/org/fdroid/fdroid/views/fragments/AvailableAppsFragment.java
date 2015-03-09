@@ -125,13 +125,13 @@ public class AvailableAppsFragment extends AppListFragment implements
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-            getActivity(), android.R.layout.simple_spinner_item, translatedCategories);
+                getActivity(), android.R.layout.simple_spinner_item, translatedCategories);
         adapter.setDropDownViewResource(
-            android.R.layout.simple_spinner_dropdown_item);
+                android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
 
         getActivity().getContentResolver().registerContentObserver(
-            AppProvider.getContentUri(), false, new CategoryObserver(adapter));
+                AppProvider.getContentUri(), false, new CategoryObserver(adapter));
 
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -139,6 +139,7 @@ public class AvailableAppsFragment extends AppListFragment implements
                 getListView().setSelection(0);
                 setCurrentCategory(categorySpinner.getItemAtPosition(pos).toString());
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 setCurrentCategory(null);

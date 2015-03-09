@@ -1,4 +1,3 @@
-
 package org.fdroid.fdroid.views;
 
 import android.annotation.TargetApi;
@@ -59,7 +58,9 @@ public class LocalRepoActivity extends ActionBarActivity {
     private int SET_IP_ADDRESS = 7345;
     private int UPDATE_REPO = 7346;
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         ((FDroidApp) getApplication()).applyTheme(this);
@@ -83,7 +84,7 @@ public class LocalRepoActivity extends ActionBarActivity {
                 new IntentFilter(LocalRepoService.STATE));
         // if no local repo exists, create one with only FDroid in it
         if (!LocalRepoManager.get(this).xmlIndex.exists())
-            new UpdateAsyncTask(this, new String[] {
+            new UpdateAsyncTask(this, new String[]{
                     getPackageName(),
             }).execute();
 
@@ -272,7 +273,7 @@ public class LocalRepoActivity extends ActionBarActivity {
             NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
             if (nfcAdapter == null)
                 return;
-            nfcAdapter.setNdefPushMessage(new NdefMessage(new NdefRecord[] {
+            nfcAdapter.setNdefPushMessage(new NdefMessage(new NdefRecord[]{
                     NdefRecord.createUri(Utils.getSharingUri(this, FDroidApp.repo)),
             }), this);
         }

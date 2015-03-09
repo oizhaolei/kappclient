@@ -52,7 +52,7 @@ public abstract class Downloader {
     Downloader(OutputStream output)
             throws MalformedURLException {
         outputStream = output;
-        outputFile   = null;
+        outputFile = null;
     }
 
     public void setProgressListener(ProgressListener listener) {
@@ -104,12 +104,14 @@ public abstract class Downloader {
      * The InterruptedException thrown from download() is there to enable cancelling asynchronous
      * downloads, but regular synchronous downloads cannot be cancelled because download() will
      * block until completed.
+     *
      * @throws java.io.IOException
      */
     public void downloadUninterrupted() throws IOException {
         try {
             download();
-        } catch (InterruptedException ignored) {}
+        } catch (InterruptedException ignored) {
+        }
     }
 
     public abstract void download() throws IOException, InterruptedException;
@@ -142,11 +144,12 @@ public abstract class Downloader {
      * you will not be able to interrupt this because the thread will block
      * after you have called download(). However if you use the AsyncDownloadWrapper,
      * then it will use this mechanism to cancel the download.
-     *
+     * <p/>
      * After every network operation that could take a while, we will check if an
      * interrupt occured during that blocking operation. The goal is to ensure we
      * don't move onto another slow, network operation if we have cancelled the
      * download.
+     *
      * @throws InterruptedException
      */
     private void throwExceptionIfInterrupted() throws InterruptedException {

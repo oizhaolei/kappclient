@@ -1,4 +1,3 @@
-
 package org.fdroid.fdroid;
 
 import android.annotation.TargetApi;
@@ -10,8 +9,7 @@ import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 
 // aka Android 4.0 aka Ice Cream Sandwich
-public class NfcNotEnabledActivity extends ActionBarActivity
-{
+public class NfcNotEnabledActivity extends ActionBarActivity {
 
     /*
      * ACTION_NFC_SETTINGS was added in 4.1 aka Jelly Bean MR1 as a

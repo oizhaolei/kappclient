@@ -178,7 +178,7 @@ public class RootInstaller extends Installer {
         rootSession.addCommand(commands, 0,
                 new Shell.OnCommandResultListener() {
                     public void onCommandResult(int commandCode, int exitCode,
-                            List<String> output) {
+                                                List<String> output) {
                         // close su shell
                         rootSession.close();
 

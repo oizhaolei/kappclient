@@ -64,7 +64,7 @@ public class SystemInstaller extends Installer {
     private Method mDeleteMethod;
 
     public SystemInstaller(Context context, PackageManager pm,
-            InstallerCallback callback) throws AndroidNotCompatibleException {
+                           InstallerCallback callback) throws AndroidNotCompatibleException {
         super(context, pm, callback);
 
         // create internal callbacks
@@ -72,11 +72,11 @@ public class SystemInstaller extends Installer {
         mDeleteObserver = new PackageDeleteObserver();
 
         try {
-            Class<?>[] installTypes = new Class[] {
+            Class<?>[] installTypes = new Class[]{
                     Uri.class, IPackageInstallObserver.class, int.class,
                     String.class
             };
-            Class<?>[] deleteTypes = new Class[] {
+            Class<?>[] deleteTypes = new Class[]{
                     String.class, IPackageDeleteObserver.class,
                     int.class
             };

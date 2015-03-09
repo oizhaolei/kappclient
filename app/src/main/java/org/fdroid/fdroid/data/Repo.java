@@ -68,7 +68,9 @@ public class Repo extends ValueObject {
         }
     }
 
-    public long getId() { return id; }
+    public long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -92,6 +94,7 @@ public class Repo extends ValueObject {
     public boolean hasBeenUpdated() {
         return this.lastetag != null;
     }
+
     /**
      * If we haven't run an update for this repo yet, then the name
      * will be unknown, in which case we will just take a guess at an
@@ -146,7 +149,7 @@ public class Repo extends ValueObject {
             String dateString = values.getAsString(RepoProvider.DataColumns.LAST_UPDATED);
             if (dateString != null) {
                 try {
-                    lastUpdated =  Utils.DATE_FORMAT.parse(dateString);
+                    lastUpdated = Utils.DATE_FORMAT.parse(dateString);
                 } catch (ParseException e) {
                     Log.e("FDroid", "Error parsing date " + dateString);
                 }

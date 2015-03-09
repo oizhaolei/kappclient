@@ -20,7 +20,7 @@ public abstract class FDroidProvider extends ContentProvider {
 
     public static final String AUTHORITY = "com.ruptech.k_app.data";
 
-    protected static final int CODE_LIST   = 1;
+    protected static final int CODE_LIST = 1;
     protected static final int CODE_SINGLE = 2;
 
     private DBHelper dbHelper;
@@ -33,6 +33,7 @@ public abstract class FDroidProvider extends ContentProvider {
 
     /**
      * Should always be the same as the provider:name in the AndroidManifest
+     *
      * @return
      */
     public final String getName() {
@@ -44,6 +45,7 @@ public abstract class FDroidProvider extends ContentProvider {
      * decide not to notify the content resolver of changes,
      * every single time we do something during many operations.
      * Based on http://stackoverflow.com/a/15886915.
+     *
      * @return
      */
     protected final boolean isApplyingBatch() {
@@ -52,7 +54,7 @@ public abstract class FDroidProvider extends ContentProvider {
 
     @Override
     public ContentProviderResult[] applyBatch(ArrayList<ContentProviderOperation> operations)
-        throws OperationApplicationException {
+            throws OperationApplicationException {
         ContentProviderResult[] result = null;
         isApplyingBatch = true;
         write().beginTransaction();
@@ -87,7 +89,7 @@ public abstract class FDroidProvider extends ContentProvider {
     @Override
     public String getType(Uri uri) {
         String type;
-        switch(getMatcher().match(uri)) {
+        switch (getMatcher().match(uri)) {
             case CODE_LIST:
                 type = "dir";
                 break;
@@ -105,7 +107,7 @@ public abstract class FDroidProvider extends ContentProvider {
 
     protected String generateQuestionMarksForInClause(int num) {
         StringBuilder sb = new StringBuilder(num * 2);
-        for (int i = 0; i < num; i ++) {
+        for (int i = 0; i < num; i++) {
             if (i != 0) {
                 sb.append(',');
             }
@@ -131,7 +133,7 @@ public abstract class FDroidProvider extends ContentProvider {
     }
 
     protected void validateFields(String[] validFields, ContentValues values)
-        throws IllegalArgumentException {
+            throws IllegalArgumentException {
         for (String key : getKeySet(values)) {
             boolean isValid = false;
             for (String validKey : validFields) {
@@ -143,7 +145,7 @@ public abstract class FDroidProvider extends ContentProvider {
 
             if (!isValid) {
                 throw new IllegalArgumentException(
-                    "Cannot save field '" + key + "' to provider " + getProviderName());
+                        "Cannot save field '" + key + "' to provider " + getProviderName());
             }
         }
     }

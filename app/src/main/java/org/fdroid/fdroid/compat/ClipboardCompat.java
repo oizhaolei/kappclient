@@ -26,7 +26,7 @@ class HoneycombClipboard extends ClipboardCompat {
 
     protected HoneycombClipboard(Context context) {
         this.manager =
-            (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+                (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
     }
 
     @Override

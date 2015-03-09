@@ -1,4 +1,3 @@
-
 package org.fdroid.fdroid.views;
 
 import android.annotation.TargetApi;
@@ -55,7 +54,7 @@ public class RepoDetailsActivity extends ActionBarActivity {
                     .commit();
         }
 
-        String[] projection = new String[] {
+        String[] projection = new String[]{
                 RepoProvider.DataColumns.NAME,
                 RepoProvider.DataColumns.ADDRESS,
                 RepoProvider.DataColumns.FINGERPRINT

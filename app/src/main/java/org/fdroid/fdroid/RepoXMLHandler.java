@@ -81,13 +81,21 @@ public class RepoXMLHandler extends DefaultHandler {
         return apksList;
     }
 
-    public int getMaxAge() { return maxage; }
+    public int getMaxAge() {
+        return maxage;
+    }
 
-    public int getVersion() { return version; }
+    public int getVersion() {
+        return version;
+    }
 
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     public String getPubKey() {
         return pubkey;
@@ -249,7 +257,7 @@ public class RepoXMLHandler extends DefaultHandler {
 
     @Override
     public void startElement(String uri, String localName, String qName,
-            Attributes attributes) throws SAXException {
+                             Attributes attributes) throws SAXException {
         super.startElement(uri, localName, qName, attributes);
 
         if (localName.equals("repo")) {
@@ -261,14 +269,16 @@ public class RepoXMLHandler extends DefaultHandler {
             if (maxAgeAttr != null) {
                 try {
                     maxage = Integer.parseInt(maxAgeAttr);
-                } catch (NumberFormatException nfe) {}
+                } catch (NumberFormatException nfe) {
+                }
             }
 
             final String versionAttr = attributes.getValue("", "version");
             if (versionAttr != null) {
                 try {
                     version = Integer.parseInt(versionAttr);
-                } catch (NumberFormatException nfe) {}
+                } catch (NumberFormatException nfe) {
+                }
             }
 
             final String nm = attributes.getValue("", "name");
@@ -286,11 +296,11 @@ public class RepoXMLHandler extends DefaultHandler {
                 Bundle data = new Bundle(1);
                 data.putString(RepoUpdater.PROGRESS_DATA_REPO_ADDRESS, repo.address);
                 progressListener.onProgress(
-                    new ProgressListener.Event(
-                        RepoUpdater.PROGRESS_TYPE_PROCESS_XML,
-                        progressCounter, totalAppCount, data));
+                        new ProgressListener.Event(
+                                RepoUpdater.PROGRESS_TYPE_PROCESS_XML,
+                                progressCounter, totalAppCount, data));
             }
-            progressCounter ++;
+            progressCounter++;
         } else if (localName.equals("package") && curapp != null && curapk == null) {
             curapk = new Apk();
             curapk.id = curapp.id;

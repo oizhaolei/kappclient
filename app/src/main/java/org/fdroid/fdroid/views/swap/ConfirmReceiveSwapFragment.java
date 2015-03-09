@@ -54,7 +54,7 @@ public class ConfirmReceiveSwapFragment extends Fragment implements ProgressList
         newRepoConfig = new NewRepoConfig(getActivity(), getActivity().getIntent());
         if (newRepoConfig.isValidRepo()) {
             ((TextView) getView().findViewById(R.id.text_description)).setText(
-                getString(R.string.swap_confirm_connect, newRepoConfig.getHost())
+                    getString(R.string.swap_confirm_connect, newRepoConfig.getHost())
             );
         } else {
             // TODO: Show error message on screen (not in popup).
@@ -73,8 +73,8 @@ public class ConfirmReceiveSwapFragment extends Fragment implements ProgressList
         if (repo == null) {
             ContentValues values = new ContentValues(5);
 
-             // TODO: i18n and think about most appropriate name. Although ideally, it will not be seen often,
-             // because we're whacking a pretty UI over the swap process so they don't need to "Manage repos"...
+            // TODO: i18n and think about most appropriate name. Although ideally, it will not be seen often,
+            // because we're whacking a pretty UI over the swap process so they don't need to "Manage repos"...
             values.put(RepoProvider.DataColumns.NAME, "Swap");
             values.put(RepoProvider.DataColumns.ADDRESS, newRepoConfig.getUriString());
             values.put(RepoProvider.DataColumns.DESCRIPTION, ""); // TODO;

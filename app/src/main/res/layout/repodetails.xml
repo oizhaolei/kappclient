@@ -21,6 +21,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
+
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -37,13 +38,15 @@
         android:layout_below="@id/input_repo_url"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:paddingTop="@dimen/form_label_top"/>
+        android:paddingTop="@dimen/form_label_top" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:singleLine="false"
         android:id="@+id/text_repo_name"
-        android:layout_below="@id/label_repo_name" android:textStyle="bold"/>
+        android:layout_below="@id/label_repo_name"
+        android:textStyle="bold" />
 
     <!-- Description - as pulled from the index file during last update... -->
     <TextView
@@ -54,14 +57,16 @@
         android:layout_below="@id/text_repo_name"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:paddingTop="@dimen/form_label_top"/>
+        android:paddingTop="@dimen/form_label_top" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:singleLine="false"
         android:scrollHorizontally="false"
         android:id="@+id/text_description"
-        android:layout_below="@id/label_description" android:textStyle="bold"/>
+        android:layout_below="@id/label_description"
+        android:textStyle="bold" />
 
     <!-- Number of apps belonging to this repo -->
     <TextView
@@ -73,11 +78,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:paddingTop="@dimen/form_label_top" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_num_apps"
-        android:layout_below="@id/label_num_apps" android:textStyle="bold"/>
+        android:layout_below="@id/label_num_apps"
+        android:textStyle="bold" />
 
     <!-- The last time this repo was updated -->
     <TextView
@@ -89,11 +96,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:paddingTop="@dimen/form_label_top" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_last_update"
-        android:layout_below="@id/label_last_update" android:textStyle="bold"/>
+        android:layout_below="@id/label_last_update"
+        android:textStyle="bold" />
 
     <!-- Signature (or "unsigned" if none) -->
     <TextView
@@ -105,20 +114,23 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:paddingTop="@dimen/form_label_top" />
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:singleLine="false"
         android:scrollHorizontally="false"
         android:id="@+id/text_repo_fingerprint"
-        android:layout_below="@id/label_repo_fingerprint" android:textStyle="bold"/>
+        android:layout_below="@id/label_repo_fingerprint"
+        android:textStyle="bold" />
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:singleLine="false"
         android:scrollHorizontally="false"
         android:id="@+id/text_repo_fingerprint_description"
-        android:layout_below="@id/text_repo_fingerprint"/>
+        android:layout_below="@id/text_repo_fingerprint" />
 
     <!-- The last time this repo was updated -->
     <TextView
@@ -128,7 +140,7 @@
         android:layout_below="@id/input_repo_url"
         android:text="@string/repo_not_yet_updated"
         android:textStyle="bold"
-        android:paddingTop="@dimen/form_label_top"/>
+        android:paddingTop="@dimen/form_label_top" />
 
     <Button
         android:id="@+id/btn_update"
@@ -136,6 +148,6 @@
         android:text="@string/repo_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_not_yet_updated"/>
+        android:layout_below="@id/text_not_yet_updated" />
 
 </RelativeLayout>

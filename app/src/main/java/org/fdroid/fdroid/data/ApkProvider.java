@@ -26,7 +26,8 @@ public class ApkProvider extends FDroidProvider {
 
     public static final class Helper {
 
-        private Helper() {}
+        private Helper() {
+        }
 
         public static void update(Context context, Apk apk) {
             ContentResolver resolver = context.getContentResolver();
@@ -105,7 +106,7 @@ public class ApkProvider extends FDroidProvider {
          * one of the apks in the "apks" argument.
          */
         public static List<Apk> knownApks(Context context,
-                                             List<Apk> apks, String[] fields) {
+                                          List<Apk> apks, String[] fields) {
             if (apks.size() == 0) {
                 return new ArrayList<Apk>();
             }
@@ -145,32 +146,32 @@ public class ApkProvider extends FDroidProvider {
 
         public static String _COUNT_DISTINCT_ID = "countDistinct";
 
-        public static String APK_ID          = "id";
-        public static String VERSION         = "version";
-        public static String REPO_ID         = "repo";
-        public static String HASH            = "hash";
-        public static String VERSION_CODE    = "vercode";
-        public static String NAME            = "apkName";
-        public static String SIZE            = "size";
-        public static String SIGNATURE       = "sig";
-        public static String SOURCE_NAME     = "srcname";
+        public static String APK_ID = "id";
+        public static String VERSION = "version";
+        public static String REPO_ID = "repo";
+        public static String HASH = "hash";
+        public static String VERSION_CODE = "vercode";
+        public static String NAME = "apkName";
+        public static String SIZE = "size";
+        public static String SIGNATURE = "sig";
+        public static String SOURCE_NAME = "srcname";
         public static String MIN_SDK_VERSION = "minSdkVersion";
         public static String MAX_SDK_VERSION = "maxSdkVersion";
-        public static String PERMISSIONS     = "permissions";
-        public static String FEATURES        = "features";
-        public static String NATIVE_CODE     = "nativecode";
-        public static String HASH_TYPE       = "hashType";
-        public static String ADDED_DATE      = "added";
-        public static String IS_COMPATIBLE   = "compatible";
+        public static String PERMISSIONS = "permissions";
+        public static String FEATURES = "features";
+        public static String NATIVE_CODE = "nativecode";
+        public static String HASH_TYPE = "hashType";
+        public static String ADDED_DATE = "added";
+        public static String IS_COMPATIBLE = "compatible";
         public static String INCOMPATIBLE_REASONS = "incompatibleReasons";
-        public static String REPO_VERSION    = "repoVersion";
-        public static String REPO_ADDRESS    = "repoAddress";
+        public static String REPO_VERSION = "repoVersion";
+        public static String REPO_ADDRESS = "repoAddress";
 
         public static String[] ALL = {
-            _ID, APK_ID, VERSION, REPO_ID, HASH, VERSION_CODE, NAME, SIZE,
-            SIGNATURE, SOURCE_NAME, MIN_SDK_VERSION, MAX_SDK_VERSION,
-            PERMISSIONS, FEATURES, NATIVE_CODE, HASH_TYPE, ADDED_DATE,
-            IS_COMPATIBLE, REPO_VERSION, REPO_ADDRESS, INCOMPATIBLE_REASONS
+                _ID, APK_ID, VERSION, REPO_ID, HASH, VERSION_CODE, NAME, SIZE,
+                SIGNATURE, SOURCE_NAME, MIN_SDK_VERSION, MAX_SDK_VERSION,
+                PERMISSIONS, FEATURES, NATIVE_CODE, HASH_TYPE, ADDED_DATE,
+                IS_COMPATIBLE, REPO_VERSION, REPO_ADDRESS, INCOMPATIBLE_REASONS
         };
     }
 
@@ -179,14 +180,14 @@ public class ApkProvider extends FDroidProvider {
     private static final int CODE_APKS = CODE_REPO + 1;
 
     private static final String PROVIDER_NAME = "ApkProvider";
-    private static final String PATH_APK  = "apk";
+    private static final String PATH_APK = "apk";
     private static final String PATH_APKS = "apks";
-    private static final String PATH_APP  = "app";
+    private static final String PATH_APP = "app";
     private static final String PATH_REPO = "repo";
 
     private static final UriMatcher matcher = new UriMatcher(-1);
 
-    public static Map<String,String> REPO_FIELDS = new HashMap<String,String>();
+    public static Map<String, String> REPO_FIELDS = new HashMap<String, String>();
 
     static {
         REPO_FIELDS.put(DataColumns.REPO_VERSION, RepoProvider.DataColumns.VERSION);
@@ -209,18 +210,18 @@ public class ApkProvider extends FDroidProvider {
 
     public static Uri getAppUri(String appId) {
         return getContentUri()
-            .buildUpon()
-            .appendPath(PATH_APP)
-            .appendPath(appId)
-            .build();
+                .buildUpon()
+                .appendPath(PATH_APP)
+                .appendPath(appId)
+                .build();
     }
 
     public static Uri getRepoUri(long repoId) {
         return getContentUri()
-            .buildUpon()
-            .appendPath(PATH_REPO)
-            .appendPath(Long.toString(repoId))
-            .build();
+                .buildUpon()
+                .appendPath(PATH_REPO)
+                .appendPath(Long.toString(repoId))
+                .build();
     }
 
     public static Uri getContentUri(Apk apk) {
@@ -229,16 +230,16 @@ public class ApkProvider extends FDroidProvider {
 
     public static Uri getContentUri(String id, int versionCode) {
         return getContentUri()
-            .buildUpon()
-            .appendPath(PATH_APK)
-            .appendPath(Integer.toString(versionCode))
-            .appendPath(id)
-            .build();
+                .buildUpon()
+                .appendPath(PATH_APK)
+                .appendPath(Integer.toString(versionCode))
+                .appendPath(id)
+                .build();
     }
 
     public static Uri getContentUri(List<Apk> apks) {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < apks.size(); i ++) {
+        for (int i = 0; i < apks.size(); i++) {
             if (i != 0) {
                 builder.append(',');
             }
@@ -302,24 +303,24 @@ public class ApkProvider extends FDroidProvider {
 
     private QuerySelection queryApp(String appId) {
         String selection = DataColumns.APK_ID + " = ? ";
-        String[] args = new String[] { appId };
+        String[] args = new String[]{appId};
         return new QuerySelection(selection, args);
     }
 
     private QuerySelection querySingle(Uri uri) {
         String selection = " vercode = ? and id = ? ";
-        String[] args = new String[] {
-            // First (0th) path segment is the word "apk",
-            // and we are not interested in it.
-            uri.getPathSegments().get(1),
-            uri.getPathSegments().get(2)
+        String[] args = new String[]{
+                // First (0th) path segment is the word "apk",
+                // and we are not interested in it.
+                uri.getPathSegments().get(1),
+                uri.getPathSegments().get(2)
         };
         return new QuerySelection(selection, args);
     }
 
     private QuerySelection queryRepo(long repoId) {
         String selection = DataColumns.REPO_ID + " = ? ";
-        String[] args = new String[]{ Long.toString(repoId) };
+        String[] args = new String[]{Long.toString(repoId)};
         return new QuerySelection(selection, args);
     }
 
@@ -329,10 +330,10 @@ public class ApkProvider extends FDroidProvider {
         StringBuilder sb = new StringBuilder();
         if (apkDetails.length > MAX_APKS_TO_QUERY) {
             throw new IllegalArgumentException(
-                "Cannot query more than " + MAX_APKS_TO_QUERY + ". " +
-                "You tried to query " + apkDetails.length);
+                    "Cannot query more than " + MAX_APKS_TO_QUERY + ". " +
+                            "You tried to query " + apkDetails.length);
         }
-        for (int i = 0; i < apkDetails.length; i ++) {
+        for (int i = 0; i < apkDetails.length; i++) {
             String[] parts = apkDetails[i].split(":");
             String id = parts[0];
             String verCode = parts[1];
@@ -389,7 +390,7 @@ public class ApkProvider extends FDroidProvider {
     }
 
     private static void removeRepoFields(ContentValues values) {
-        for (Map.Entry<String,String> repoField : REPO_FIELDS.entrySet()) {
+        for (Map.Entry<String, String> repoField : REPO_FIELDS.entrySet()) {
             String field = repoField.getKey();
             if (values.containsKey(field)) {
                 Log.i("FDroid", "Cannot insert/update '" + field + "' field " +
@@ -409,8 +410,8 @@ public class ApkProvider extends FDroidProvider {
             getContext().getContentResolver().notifyChange(uri, null);
         }
         return getContentUri(
-            values.getAsString(DataColumns.APK_ID),
-            values.getAsInteger(DataColumns.VERSION_CODE));
+                values.getAsString(DataColumns.APK_ID),
+                values.getAsInteger(DataColumns.VERSION_CODE));
 
     }
 

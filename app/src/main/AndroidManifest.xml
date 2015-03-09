@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ruptech.k_app"
     android:installLocation="auto">
- 
+
 
     <supports-screens
         android:anyDensity="true"

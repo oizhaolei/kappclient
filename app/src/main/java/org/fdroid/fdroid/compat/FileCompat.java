@@ -53,9 +53,9 @@ public class FileCompat {
 
     protected static void symlinkRuntime(SanitizedFile source, SanitizedFile dest) {
         String commands[] = {
-            "/system/bin/ln",
-            source.getAbsolutePath(),
-            dest.getAbsolutePath()
+                "/system/bin/ln",
+                source.getAbsolutePath(),
+                dest.getAbsolutePath()
         };
         try {
             Log.d(TAG, "Executing command: " + commands[0] + " " + commands[1] + " " + commands[2]);
@@ -101,9 +101,9 @@ public class FileCompat {
         // The "file" must be a sanitized file, and hence only contain A-Za-z0-9.-_ already,
         // but it makes no assurances about the parent directory.
         String[] args = {
-            "/system/bin/chmod",
-            mode,
-            file.getAbsolutePath()
+                "/system/bin/chmod",
+                mode,
+                file.getAbsolutePath()
         };
 
         try {
@@ -125,12 +125,12 @@ public class FileCompat {
             return file.setExecutable(readable, ownerOnly);
         } else {
             String mode;
-            if ( readable ) {
+            if (readable) {
                 mode = ownerOnly ? "0700" : "0711";
             } else {
                 mode = ownerOnly ? "0600" : "0600";
             }
-            return setMode( file, mode );
+            return setMode(file, mode);
         }
 
     }

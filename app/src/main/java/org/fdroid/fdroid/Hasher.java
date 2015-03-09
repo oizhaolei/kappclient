@@ -101,7 +101,7 @@ public class Hasher {
         byte[] encoded = null;
         try {
             encoded = cert.getEncoded();
-        } catch(CertificateEncodingException e) {
+        } catch (CertificateEncodingException e) {
             encoded = new byte[0];
         }
         return hex(encoded);
@@ -121,7 +121,7 @@ public class Hasher {
 
     public static byte[] unhex(String data) {
         byte[] rawdata = new byte[data.length() / 2];
-        for (int i=0; i < data.length(); i++) {
+        for (int i = 0; i < data.length(); i++) {
             char halfbyte = data.charAt(i);
             int value;
             if ('0' <= halfbyte && halfbyte <= '9')
@@ -132,7 +132,7 @@ public class Hasher {
                 value = halfbyte - 'A' + 10;
             else
                 throw new IllegalArgumentException("Bad hex digit");
-            rawdata[i/2] += (byte)(i % 2 == 0 ? value << 4 : value);
+            rawdata[i / 2] += (byte) (i % 2 == 0 ? value << 4 : value);
         }
         return rawdata;
     }

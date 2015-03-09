@@ -44,17 +44,17 @@ public class RepoDetailsFragment extends Fragment {
      * all of this info, otherwise they will be hidden.
      */
     private static final int[] SHOW_IF_EXISTS = {
-        R.id.label_repo_name,
-        R.id.text_repo_name,
-        R.id.label_description,
-        R.id.text_description,
-        R.id.label_num_apps,
-        R.id.text_num_apps,
-        R.id.label_last_update,
-        R.id.text_last_update,
-        R.id.label_repo_fingerprint,
-        R.id.text_repo_fingerprint,
-        R.id.text_repo_fingerprint_description
+            R.id.label_repo_name,
+            R.id.text_repo_name,
+            R.id.label_description,
+            R.id.text_description,
+            R.id.label_num_apps,
+            R.id.text_num_apps,
+            R.id.label_last_update,
+            R.id.text_last_update,
+            R.id.label_repo_fingerprint,
+            R.id.text_repo_fingerprint,
+            R.id.text_repo_fingerprint_description
     };
 
     /**
@@ -62,8 +62,8 @@ public class RepoDetailsFragment extends Fragment {
      * these, otherwise they are hidden.
      */
     private static final int[] HIDE_IF_EXISTS = {
-        R.id.text_not_yet_updated,
-        R.id.btn_update
+            R.id.text_not_yet_updated,
+            R.id.btn_update
     };
 
     private static final int DELETE = 0;
@@ -119,16 +119,16 @@ public class RepoDetailsFragment extends Fragment {
             return new LinearLayout(container.getContext());
         }
 
-        ViewGroup repoView = (ViewGroup)inflater.inflate(R.layout.repodetails, null);
+        ViewGroup repoView = (ViewGroup) inflater.inflate(R.layout.repodetails, null);
         updateView(repoView);
 
         // Setup listeners here, rather than in updateView(...),
         // because otherwise we will end up adding multiple listeners with
         // subsequent calls to updateView().
-        EditText inputUrl = (EditText)repoView.findViewById(R.id.input_repo_url);
+        EditText inputUrl = (EditText) repoView.findViewById(R.id.input_repo_url);
         inputUrl.addTextChangedListener(new UrlWatcher());
 
-        Button update = (Button)repoView.findViewById(R.id.btn_update);
+        Button update = (Button) repoView.findViewById(R.id.btn_update);
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +146,7 @@ public class RepoDetailsFragment extends Fragment {
      */
     private void updateView(ViewGroup repoView) {
 
-        EditText inputUrl = (EditText)repoView.findViewById(R.id.input_repo_url);
+        EditText inputUrl = (EditText) repoView.findViewById(R.id.input_repo_url);
         inputUrl.setText(repo.address);
 
         if (repo.hasBeenUpdated()) {
@@ -180,9 +180,9 @@ public class RepoDetailsFragment extends Fragment {
         setMultipleViewVisibility(repoView, SHOW_IF_EXISTS, View.VISIBLE);
         setMultipleViewVisibility(repoView, HIDE_IF_EXISTS, View.GONE);
 
-        TextView name          = (TextView)repoView.findViewById(R.id.text_repo_name);
-        TextView numApps       = (TextView)repoView.findViewById(R.id.text_num_apps);
-        TextView lastUpdated   = (TextView)repoView.findViewById(R.id.text_last_update);
+        TextView name = (TextView) repoView.findViewById(R.id.text_repo_name);
+        TextView numApps = (TextView) repoView.findViewById(R.id.text_num_apps);
+        TextView lastUpdated = (TextView) repoView.findViewById(R.id.text_last_update);
 
         name.setText(repo.getName());
 
@@ -201,8 +201,8 @@ public class RepoDetailsFragment extends Fragment {
 
     private void setupDescription(ViewGroup parent, Repo repo) {
 
-        TextView descriptionLabel = (TextView)parent.findViewById(R.id.label_description);
-        TextView description      = (TextView)parent.findViewById(R.id.text_description);
+        TextView descriptionLabel = (TextView) parent.findViewById(R.id.label_description);
+        TextView description = (TextView) parent.findViewById(R.id.text_description);
 
         if (repo.description == null || repo.description.length() == 0) {
             descriptionLabel.setVisibility(View.GONE);
@@ -233,7 +233,7 @@ public class RepoDetailsFragment extends Fragment {
             public void onProgress(Event event) {
                 if (event.type.equals(UpdateService.EVENT_COMPLETE_WITH_CHANGES)) {
                     repo = loadRepoDetails();
-                    updateView((ViewGroup)getView());
+                    updateView((ViewGroup) getView());
                 }
 
                 if (event.type.equals(UpdateService.EVENT_FINISHED)) {
@@ -249,10 +249,12 @@ public class RepoDetailsFragment extends Fragment {
     class UrlWatcher implements TextWatcher {
 
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
 
         @Override
-        public void afterTextChanged(Editable s) {}
+        public void afterTextChanged(Editable s) {
+        }
 
         @Override
         // TODO: This is called each character change, resulting in a DB query.
@@ -276,14 +278,14 @@ public class RepoDetailsFragment extends Fragment {
         MenuItem update = menu.add(Menu.NONE, UPDATE, 0, R.string.repo_update);
         update.setIcon(R.drawable.ic_menu_refresh);
         MenuItemCompat.setShowAsAction(update,
-            MenuItemCompat.SHOW_AS_ACTION_ALWAYS |
-            MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+                MenuItemCompat.SHOW_AS_ACTION_ALWAYS |
+                        MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 
         MenuItem delete = menu.add(Menu.NONE, DELETE, 0, R.string.delete);
         delete.setIcon(android.R.drawable.ic_menu_delete);
         MenuItemCompat.setShowAsAction(delete,
-            MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
-            MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+                MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
+                        MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
     }
 
     @Override
@@ -309,8 +311,8 @@ public class RepoDetailsFragment extends Fragment {
             enableNfc = menu.add(Menu.NONE, ENABLE_NFC, 0, R.string.enable_nfc_send);
             enableNfc.setIcon(android.R.drawable.ic_menu_preferences);
             MenuItemCompat.setShowAsAction(enableNfc,
-                MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
-                MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+                    MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
+                            MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
         } else if (enableNfc != null) {
             // remove the existing MenuItem since NFC is now enabled
             menu.removeItem(enableNfc.getItemId());
@@ -339,17 +341,17 @@ public class RepoDetailsFragment extends Fragment {
 
     private void promptForDelete() {
         new AlertDialog.Builder(getActivity())
-            .setTitle(R.string.repo_confirm_delete_title)
-            .setIcon(android.R.drawable.ic_menu_delete)
-            .setMessage(R.string.repo_confirm_delete_body)
-            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Repo repo = RepoDetailsFragment.this.repo;
-                    RepoProvider.Helper.remove(getActivity(), repo.getId());
-                    getActivity().finish();
-                }
-            }).setNegativeButton(android.R.string.cancel,
+                .setTitle(R.string.repo_confirm_delete_title)
+                .setIcon(android.R.drawable.ic_menu_delete)
+                .setMessage(R.string.repo_confirm_delete_body)
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Repo repo = RepoDetailsFragment.this.repo;
+                        RepoProvider.Helper.remove(getActivity(), repo.getId());
+                        getActivity().finish();
+                    }
+                }).setNegativeButton(android.R.string.cancel,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -360,8 +362,8 @@ public class RepoDetailsFragment extends Fragment {
     }
 
     private void setupRepoFingerprint(ViewGroup parent, Repo repo) {
-        TextView repoFingerprintView     = (TextView)parent.findViewById(R.id.text_repo_fingerprint);
-        TextView repoFingerprintDescView = (TextView)parent.findViewById(R.id.text_repo_fingerprint_description);
+        TextView repoFingerprintView = (TextView) parent.findViewById(R.id.text_repo_fingerprint);
+        TextView repoFingerprintDescView = (TextView) parent.findViewById(R.id.text_repo_fingerprint_description);
 
         String repoFingerprint;
         int repoFingerprintColor;

@@ -49,7 +49,7 @@ public class AppListFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public String getPageTitle(int i) {
-        switch(i) {
+        switch (i) {
             case 0:
                 return parent.getString(R.string.tab_noninstalled);
             case 1:

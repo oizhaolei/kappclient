@@ -35,8 +35,8 @@ public class InstalledAppProvider extends FDroidProvider {
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
                     cachedInfo.put(
-                        cursor.getString(cursor.getColumnIndex(DataColumns.APP_ID)),
-                        cursor.getInt(cursor.getColumnIndex(DataColumns.VERSION_CODE))
+                            cursor.getString(cursor.getColumnIndex(DataColumns.APP_ID)),
+                            cursor.getInt(cursor.getColumnIndex(DataColumns.VERSION_CODE))
                     );
                     cursor.moveToNext();
                 }
@@ -65,7 +65,7 @@ public class InstalledAppProvider extends FDroidProvider {
     private static final String PROVIDER_NAME = "InstalledAppProvider";
 
     private static final String PATH_SEARCH = "search";
-    private static final int    CODE_SEARCH = CODE_SINGLE + 1;
+    private static final int CODE_SEARCH = CODE_SINGLE + 1;
 
     private static final UriMatcher matcher = new UriMatcher(-1);
 
@@ -85,9 +85,9 @@ public class InstalledAppProvider extends FDroidProvider {
 
     public static Uri getSearchUri(String keywords) {
         return getContentUri().buildUpon()
-            .appendPath(PATH_SEARCH)
-            .appendPath(keywords)
-            .build();
+                .appendPath(PATH_SEARCH)
+                .appendPath(keywords)
+                .build();
     }
 
     public static String getApplicationLabel(Context context, String packageName) {
@@ -124,11 +124,11 @@ public class InstalledAppProvider extends FDroidProvider {
     }
 
     private QuerySelection queryApp(String appId) {
-        return new QuerySelection("appId = ?", new String[]{ appId });
+        return new QuerySelection("appId = ?", new String[]{appId});
     }
 
     private QuerySelection querySearch(String keywords) {
-        return new QuerySelection("applicationLabel LIKE ?", new String[]{ "%" + keywords + "%" });
+        return new QuerySelection("applicationLabel LIKE ?", new String[]{"%" + keywords + "%"});
     }
 
     @Override

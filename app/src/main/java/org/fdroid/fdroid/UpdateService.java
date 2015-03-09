@@ -66,25 +66,25 @@ import java.util.Map;
 
 public class UpdateService extends IntentService implements ProgressListener {
 
-    public static final String RESULT_MESSAGE     = "msg";
-    public static final String RESULT_EVENT       = "event";
+    public static final String RESULT_MESSAGE = "msg";
+    public static final String RESULT_EVENT = "event";
     public static final String RESULT_REPO_ERRORS = "repoErrors";
 
     public static final int STATUS_COMPLETE_WITH_CHANGES = 0;
-    public static final int STATUS_COMPLETE_AND_SAME     = 1;
-    public static final int STATUS_ERROR_GLOBAL          = 2;
-    public static final int STATUS_ERROR_LOCAL           = 3;
-    public static final int STATUS_ERROR_LOCAL_SMALL     = 4;
-    public static final int STATUS_INFO                  = 5;
+    public static final int STATUS_COMPLETE_AND_SAME = 1;
+    public static final int STATUS_ERROR_GLOBAL = 2;
+    public static final int STATUS_ERROR_LOCAL = 3;
+    public static final int STATUS_ERROR_LOCAL_SMALL = 4;
+    public static final int STATUS_INFO = 5;
 
     // I don't like that I've had to dupliacte the statuses above with strings here, however
     // one method of communication/notification is using ResultReceiver (int status codes)
     // while the other uses progress events (string event types).
     public static final String EVENT_COMPLETE_WITH_CHANGES = "repoUpdateComplete (changed)";
-    public static final String EVENT_COMPLETE_AND_SAME     = "repoUpdateComplete (not changed)";
-    public static final String EVENT_FINISHED              = "repoUpdateFinished";
-    public static final String EVENT_ERROR                 = "repoUpdateError";
-    public static final String EVENT_INFO                  = "repoUpdateInfo";
+    public static final String EVENT_COMPLETE_AND_SAME = "repoUpdateComplete (not changed)";
+    public static final String EVENT_FINISHED = "repoUpdateFinished";
+    public static final String EVENT_ERROR = "repoUpdateError";
+    public static final String EVENT_INFO = "repoUpdateInfo";
 
     public static final String EXTRA_RECEIVER = "receiver";
     public static final String EXTRA_ADDRESS = "address";
@@ -100,13 +100,13 @@ public class UpdateService extends IntentService implements ProgressListener {
      * values changed in the index, some fields should not be updated. Rather, they should be
      * ignored, because they were explicitly set by the user, and hence can't be automatically
      * overridden by the index.
-     *
+     * <p/>
      * NOTE: In the future, these attributes will be moved to a join table, so that the app table
      * is essentially completely transient, and can be nuked at any time.
      */
     private static final String[] APP_FIELDS_TO_IGNORE = {
-        AppProvider.DataColumns.IGNORE_ALLUPDATES,
-        AppProvider.DataColumns.IGNORE_THISUPDATE
+            AppProvider.DataColumns.IGNORE_ALLUPDATES,
+            AppProvider.DataColumns.IGNORE_THISUPDATE
     };
 
     // For receiving results from the UpdateService when we've told it to
@@ -288,10 +288,11 @@ public class UpdateService extends IntentService implements ProgressListener {
     /**
      * Check whether it is time to run the scheduled update.
      * We don't want to run if:
-     *  - The time between scheduled runs is set to zero (though don't know
-     *    when that would occur)
-     *  - Last update was too recent
-     *  - Not on wifi, but the property for "Only auto update on wifi" is set.
+     * - The time between scheduled runs is set to zero (though don't know
+     * when that would occur)
+     * - Last update was too recent
+     * - Not on wifi, but the property for "Only auto update on wifi" is set.
+     *
      * @return True if we are due for a scheduled update.
      */
     private boolean verifyIsTimeForScheduledRun() {
@@ -316,7 +317,7 @@ public class UpdateService extends IntentService implements ProgressListener {
             ConnectivityManager conMan = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo.State wifi = conMan.getNetworkInfo(1).getState();
             if (wifi != NetworkInfo.State.CONNECTED &&
-                    wifi !=  NetworkInfo.State.CONNECTING) {
+                    wifi != NetworkInfo.State.CONNECTING) {
                 Log.d("FDroid", "Skipping update - wifi not available");
                 return false;
             }
@@ -541,7 +542,7 @@ public class UpdateService extends IntentService implements ProgressListener {
     private List<String> getKnownAppIdsFromProvider(List<App> apps) {
 
         final Uri uri = AppProvider.getContentUri(apps);
-        String[] fields = new String[] { AppProvider.DataColumns.APP_ID };
+        String[] fields = new String[]{AppProvider.DataColumns.APP_ID};
         Cursor cursor = getContentResolver().query(uri, fields, null, null, null);
 
         int knownIdCount = cursor != null ? cursor.getCount() : 0;
@@ -566,13 +567,14 @@ public class UpdateService extends IntentService implements ProgressListener {
      * {@link UpdateService#getKnownApks(java.util.List)}
      * instead, which will only call this with the right number of apks at
      * a time.
+     *
      * @see UpdateService#getKnownAppIds(java.util.List)
      */
     private List<Apk> getKnownApksFromProvider(List<Apk> apks) {
         String[] fields = {
-            ApkProvider.DataColumns.APK_ID,
-            ApkProvider.DataColumns.VERSION,
-            ApkProvider.DataColumns.VERSION_CODE
+                ApkProvider.DataColumns.APK_ID,
+                ApkProvider.DataColumns.VERSION,
+                ApkProvider.DataColumns.VERSION_CODE
         };
         return ApkProvider.Helper.knownApks(this, apks, fields);
     }
@@ -617,8 +619,8 @@ public class UpdateService extends IntentService implements ProgressListener {
             int count = Math.min(operations.size() - i, 100);
             ArrayList<ContentProviderOperation> o = new ArrayList<ContentProviderOperation>(operations.subList(i, i + count));
             sendStatus(STATUS_INFO, getString(
-                R.string.status_inserting,
-                (int)((double)(currentCount + i) / totalUpdateCount * 100)));
+                    R.string.status_inserting,
+                    (int) ((double) (currentCount + i) / totalUpdateCount * 100)));
             getContentResolver().applyBatch(providerAuthority, o);
             i += 100;
         }
@@ -714,9 +716,9 @@ public class UpdateService extends IntentService implements ProgressListener {
         List<Apk> toRemove = new ArrayList<Apk>();
 
         String[] fields = {
-            ApkProvider.DataColumns.APK_ID,
-            ApkProvider.DataColumns.VERSION_CODE,
-            ApkProvider.DataColumns.VERSION,
+                ApkProvider.DataColumns.APK_ID,
+                ApkProvider.DataColumns.VERSION_CODE,
+                ApkProvider.DataColumns.VERSION,
         };
 
         for (final Repo repo : updatedRepos) {
@@ -771,8 +773,8 @@ public class UpdateService extends IntentService implements ProgressListener {
         String repoAddress = event.getData().getString(RepoUpdater.PROGRESS_DATA_REPO_ADDRESS);
         if (event.type.equals(Downloader.EVENT_PROGRESS)) {
             String downloadedSize = Utils.getFriendlySize(event.progress);
-            String totalSize      = Utils.getFriendlySize(event.total);
-            int percent           = (int)((double)event.progress/event.total * 100);
+            String totalSize = Utils.getFriendlySize(event.total);
+            int percent = (int) ((double) event.progress / event.total * 100);
             message = getString(R.string.status_download, repoAddress, downloadedSize, totalSize, percent);
         } else if (event.type.equals(RepoUpdater.PROGRESS_TYPE_PROCESS_XML)) {
             message = getString(R.string.status_processing_xml, repoAddress, event.progress, event.total);

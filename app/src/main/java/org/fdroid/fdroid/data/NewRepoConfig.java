@@ -1,4 +1,3 @@
-
 package org.fdroid.fdroid.data;
 
 import android.content.Context;
@@ -145,7 +144,9 @@ public class NewRepoConfig {
         return errorMessage;
     }
 
-    /** Sanitize and format an incoming repo URI for function and readability */
+    /**
+     * Sanitize and format an incoming repo URI for function and readability
+     */
     public static String sanitizeRepoUri(Uri uri) {
         String scheme = uri.getScheme();
         String host = uri.getHost();

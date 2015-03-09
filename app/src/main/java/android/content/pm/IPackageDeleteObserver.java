@@ -39,7 +39,7 @@ public interface IPackageDeleteObserver extends android.os.IInterface {
         }
 
         public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply,
-                int flags) throws android.os.RemoteException {
+                                  int flags) throws android.os.RemoteException {
             throw new RuntimeException("Stub!");
         }
     }

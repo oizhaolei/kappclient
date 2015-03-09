@@ -37,6 +37,7 @@ public class HttpDownloader extends Downloader {
     /**
      * Downloads to a temporary file, which *you must delete yourself when
      * you are done*.
+     *
      * @see Downloader#getFile()
      */
     HttpDownloader(String source, Context ctx) throws IOException {

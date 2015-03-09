@@ -21,26 +21,26 @@ public class PreferenceFragment
         implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static String[] summariesToUpdate = {
-        Preferences.PREF_UPD_INTERVAL,
-        Preferences.PREF_UPD_WIFI_ONLY,
-        Preferences.PREF_UPD_NOTIFY,
-        Preferences.PREF_UPD_HISTORY,
-        Preferences.PREF_ROOTED,
-        Preferences.PREF_INCOMP_VER,
-        Preferences.PREF_THEME,
-        Preferences.PREF_PERMISSIONS,
-        Preferences.PREF_COMPACT_LAYOUT,
-        Preferences.PREF_IGN_TOUCH,
-        Preferences.PREF_LOCAL_REPO_BONJOUR,
-        Preferences.PREF_LOCAL_REPO_NAME,
-        Preferences.PREF_LOCAL_REPO_HTTPS,
-        Preferences.PREF_CACHE_APK,
-        Preferences.PREF_EXPERT,
-        Preferences.PREF_ROOT_INSTALLER,
-        Preferences.PREF_SYSTEM_INSTALLER,
-        Preferences.PREF_ENABLE_PROXY,
-        Preferences.PREF_PROXY_HOST,
-        Preferences.PREF_PROXY_PORT,
+            Preferences.PREF_UPD_INTERVAL,
+            Preferences.PREF_UPD_WIFI_ONLY,
+            Preferences.PREF_UPD_NOTIFY,
+            Preferences.PREF_UPD_HISTORY,
+            Preferences.PREF_ROOTED,
+            Preferences.PREF_INCOMP_VER,
+            Preferences.PREF_THEME,
+            Preferences.PREF_PERMISSIONS,
+            Preferences.PREF_COMPACT_LAYOUT,
+            Preferences.PREF_IGN_TOUCH,
+            Preferences.PREF_LOCAL_REPO_BONJOUR,
+            Preferences.PREF_LOCAL_REPO_NAME,
+            Preferences.PREF_LOCAL_REPO_HTTPS,
+            Preferences.PREF_CACHE_APK,
+            Preferences.PREF_EXPERT,
+            Preferences.PREF_ROOT_INSTALLER,
+            Preferences.PREF_SYSTEM_INSTALLER,
+            Preferences.PREF_ENABLE_PROXY,
+            Preferences.PREF_PROXY_HOST,
+            Preferences.PREF_PROXY_PORT,
     };
 
     @Override
@@ -50,17 +50,17 @@ public class PreferenceFragment
     }
 
     protected void checkSummary(String key, int resId) {
-        CheckBoxPreference pref = (CheckBoxPreference)findPreference(key);
+        CheckBoxPreference pref = (CheckBoxPreference) findPreference(key);
         pref.setSummary(resId);
     }
 
     protected void entrySummary(String key) {
-        ListPreference pref = (ListPreference)findPreference(key);
+        ListPreference pref = (ListPreference) findPreference(key);
         pref.setSummary(pref.getEntry());
     }
 
     protected void textSummary(String key, int resId) {
-        EditTextPreference pref = (EditTextPreference)findPreference(key);
+        EditTextPreference pref = (EditTextPreference) findPreference(key);
         pref.setSummary(getString(resId, pref.getText()));
     }
 
@@ -69,7 +69,7 @@ public class PreferenceFragment
         int result = 0;
 
         if (key.equals(Preferences.PREF_UPD_INTERVAL)) {
-            ListPreference pref = (ListPreference)findPreference(
+            ListPreference pref = (ListPreference) findPreference(
                     Preferences.PREF_UPD_INTERVAL);
             int interval = Integer.parseInt(pref.getValue());
             Preference onlyOnWifi = findPreference(

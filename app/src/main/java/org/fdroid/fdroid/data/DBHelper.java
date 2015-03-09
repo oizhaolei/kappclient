@@ -38,26 +38,26 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE_APK =
             "CREATE TABLE " + TABLE_APK + " ( "
-            + "id text not null, "
-            + "version text not null, "
-            + "repo integer not null, "
-            + "hash text not null, "
-            + "vercode int not null,"
-            + "apkName text not null, "
-            + "size int not null, "
-            + "sig string, "
-            + "srcname string, "
-            + "minSdkVersion integer, "
-            + "maxSdkVersion integer, "
-            + "permissions string, "
-            + "features string, "
-            + "nativecode string, "
-            + "hashType string, "
-            + "added string, "
-            + "compatible int not null, "
-            + "incompatibleReasons text, "
-            + "primary key(id, vercode)"
-            + ");";
+                    + "id text not null, "
+                    + "version text not null, "
+                    + "repo integer not null, "
+                    + "hash text not null, "
+                    + "vercode int not null,"
+                    + "apkName text not null, "
+                    + "size int not null, "
+                    + "sig string, "
+                    + "srcname string, "
+                    + "minSdkVersion integer, "
+                    + "maxSdkVersion integer, "
+                    + "permissions string, "
+                    + "features string, "
+                    + "nativecode string, "
+                    + "hashType string, "
+                    + "added string, "
+                    + "compatible int not null, "
+                    + "incompatibleReasons text, "
+                    + "primary key(id, vercode)"
+                    + ");";
 
     public static final String TABLE_APP = "fdroid_app";
     private static final String CREATE_TABLE_APP = "CREATE TABLE " + TABLE_APP
@@ -111,7 +111,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private void populateRepoNames(SQLiteDatabase db, int oldVersion) {
         if (oldVersion < 37) {
             Log.i("FDroid", "Populating repo names from the url");
-            String[] columns = { "address", "_id" };
+            String[] columns = {"address", "_id"};
             Cursor cursor = db.query(TABLE_REPO, columns,
                     "name IS NULL OR name = ''", null, null, null, null);
             if (cursor != null) {
@@ -123,7 +123,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         ContentValues values = new ContentValues(1);
                         String name = Repo.addressToName(address);
                         values.put("name", name);
-                        String[] args = { Long.toString(id) };
+                        String[] args = {Long.toString(id)};
                         Log.i("FDroid", "Setting repo name to '" + name + "' for repo " + address);
                         db.update(TABLE_REPO, values, "_id = ?", args);
                         cursor.moveToNext();
@@ -193,49 +193,49 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_REPO);
 
         insertRepo(
-            db,
-            context.getString(R.string.fdroid_repo_name),
-            context.getString(R.string.fdroid_repo_address),
-            context.getString(R.string.fdroid_repo_description),
-            context.getString(R.string.fdroid_repo_pubkey),
-            context.getResources().getInteger(R.integer.fdroid_repo_inuse),
-            context.getResources().getInteger(R.integer.fdroid_repo_priority)
+                db,
+                context.getString(R.string.fdroid_repo_name),
+                context.getString(R.string.fdroid_repo_address),
+                context.getString(R.string.fdroid_repo_description),
+                context.getString(R.string.fdroid_repo_pubkey),
+                context.getResources().getInteger(R.integer.fdroid_repo_inuse),
+                context.getResources().getInteger(R.integer.fdroid_repo_priority)
         );
 
         insertRepo(
-            db,
-            context.getString(R.string.fdroid_archive_name),
-            context.getString(R.string.fdroid_archive_address),
-            context.getString(R.string.fdroid_archive_description),
-            context.getString(R.string.fdroid_archive_pubkey),
-            context.getResources().getInteger(R.integer.fdroid_archive_inuse),
-            context.getResources().getInteger(R.integer.fdroid_archive_priority)
+                db,
+                context.getString(R.string.fdroid_archive_name),
+                context.getString(R.string.fdroid_archive_address),
+                context.getString(R.string.fdroid_archive_description),
+                context.getString(R.string.fdroid_archive_pubkey),
+                context.getResources().getInteger(R.integer.fdroid_archive_inuse),
+                context.getResources().getInteger(R.integer.fdroid_archive_priority)
         );
 
         insertRepo(
-            db,
-            context.getString(R.string.guardianproject_repo_name),
-            context.getString(R.string.guardianproject_repo_address),
-            context.getString(R.string.guardianproject_repo_description),
-            context.getString(R.string.guardianproject_repo_pubkey),
-            context.getResources().getInteger(R.integer.guardianproject_repo_inuse),
-            context.getResources().getInteger(R.integer.guardianproject_repo_priority)
+                db,
+                context.getString(R.string.guardianproject_repo_name),
+                context.getString(R.string.guardianproject_repo_address),
+                context.getString(R.string.guardianproject_repo_description),
+                context.getString(R.string.guardianproject_repo_pubkey),
+                context.getResources().getInteger(R.integer.guardianproject_repo_inuse),
+                context.getResources().getInteger(R.integer.guardianproject_repo_priority)
         );
 
         insertRepo(
-            db,
-            context.getString(R.string.guardianproject_archive_name),
-            context.getString(R.string.guardianproject_archive_address),
-            context.getString(R.string.guardianproject_archive_description),
-            context.getString(R.string.guardianproject_archive_pubkey),
-            context.getResources().getInteger(R.integer.guardianproject_archive_inuse),
-            context.getResources().getInteger(R.integer.guardianproject_archive_priority)
+                db,
+                context.getString(R.string.guardianproject_archive_name),
+                context.getString(R.string.guardianproject_archive_address),
+                context.getString(R.string.guardianproject_archive_description),
+                context.getString(R.string.guardianproject_archive_pubkey),
+                context.getResources().getInteger(R.integer.guardianproject_archive_inuse),
+                context.getResources().getInteger(R.integer.guardianproject_archive_priority)
         );
     }
 
     private void insertRepo(
-        SQLiteDatabase db, String name, String address, String description,
-        String pubKey, int inUse, int priority) {
+            SQLiteDatabase db, String name, String address, String description,
+            String pubKey, int inUse, int priority) {
 
         ContentValues values = new ContentValues();
         values.put(RepoProvider.DataColumns.ADDRESS, address);
@@ -246,7 +246,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(RepoProvider.DataColumns.MAX_AGE, 0);
         values.put(RepoProvider.DataColumns.IN_USE, inUse);
         values.put(RepoProvider.DataColumns.PRIORITY, priority);
-        values.put(RepoProvider.DataColumns.LAST_ETAG, (String)null);
+        values.put(RepoProvider.DataColumns.LAST_ETAG, (String) null);
 
         Log.i("FDroid", "Adding repository " + name);
         db.insert(TABLE_REPO, null, values);
@@ -284,7 +284,7 @@ public class DBHelper extends SQLiteOpenHelper {
         if (oldVersion < 20) {
             List<Repo> oldrepos = new ArrayList<Repo>();
             Cursor cursor = db.query(TABLE_REPO,
-                    new String[] { "address", "inuse", "pubkey" },
+                    new String[]{"address", "inuse", "pubkey"},
                     null, null, null, null, null);
             if (cursor != null) {
                 if (cursor.getCount() > 0) {
@@ -315,12 +315,12 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     private void insertNameAndDescription(SQLiteDatabase db,
-            int addressResId, int nameResId, int descriptionResId) {
+                                          int addressResId, int nameResId, int descriptionResId) {
         ContentValues values = new ContentValues();
         values.clear();
         values.put("name", context.getString(nameResId));
         values.put("description", context.getString(descriptionResId));
-        db.update(TABLE_REPO, values, "address = ?", new String[] {
+        db.update(TABLE_REPO, values, "address = ?", new String[]{
                 context.getString(addressResId)
         });
     }
@@ -359,7 +359,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 db.execSQL("alter table " + TABLE_REPO + " add column fingerprint text");
             List<Repo> oldrepos = new ArrayList<Repo>();
             Cursor cursor = db.query(TABLE_REPO,
-                    new String[] { "address", "pubkey" },
+                    new String[]{"address", "pubkey"},
                     null, null, null, null, null);
             if (cursor != null) {
                 if (cursor.getCount() > 0) {
@@ -377,7 +377,7 @@ public class DBHelper extends SQLiteOpenHelper {
             for (final Repo repo : oldrepos) {
                 ContentValues values = new ContentValues();
                 values.put("fingerprint", Utils.calcFingerprint(repo.pubkey));
-                db.update(TABLE_REPO, values, "address = ?", new String[] { repo.address });
+                db.update(TABLE_REPO, values, "address = ?", new String[]{repo.address});
             }
         }
     }
@@ -442,7 +442,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     private static boolean columnExists(SQLiteDatabase db,
-            String table, String column) {
+                                        String table, String column) {
         return (db.rawQuery("select * from " + table + " limit 0,1", null)
                 .getColumnIndex(column) != -1);
     }

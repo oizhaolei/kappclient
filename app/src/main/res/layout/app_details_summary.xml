@@ -1,51 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-	android:paddingTop="4dp"
-	android:paddingBottom="8dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="8dp"
     android:paddingLeft="5dp"
     android:paddingRight="5dp">
 
     <TextView
-		android:id="@+id/summary"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:textStyle="bold"
-        tools:text="Application manager"/>
+        android:id="@+id/summary"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        tools:text="Application manager" />
 
-	<TextView
-		android:id="@+id/appid"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:textSize="12sp"
+    <TextView
+        android:id="@+id/appid"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
         tools:text="org.fdroid.fdroid" />
 
-	<TextView
-		android:id="@+id/signature"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:textSize="12sp" />
+    <TextView
+        android:id="@+id/signature"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp" />
 
-	<TextView
-		android:id="@+id/antifeatures"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="6sp"
-		android:textStyle="bold"
-		android:textColor="#ff0000"
+    <TextView
+        android:id="@+id/antifeatures"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6sp"
+        android:textStyle="bold"
+        android:textColor="#ff0000"
         tools:text="Feeds you too much chocolate" />
 
-	<TextView
-		android:id="@+id/description"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="8sp"
-		android:textSize="13sp"
-		android:singleLine="false"
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8sp"
+        android:textSize="13sp"
+        android:singleLine="false"
         tools:text="Connects to K-App compatible repositories. The default repo is hosted at f-droid.org, which contains only bona fide FOSS.
 
 Android is open in the sense that you are free to install apks from anywhere you wish, but there are many good reasons for using a client/repository setup:
@@ -59,21 +58,21 @@ Android is open in the sense that you are free to install apks from anywhere you
 
 Changelog" />
 
-	<TextView
-		android:id="@+id/permissions"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="8sp"
-		android:singleLine="true"
-		android:textStyle="bold"
+    <TextView
+        android:id="@+id/permissions"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8sp"
+        android:singleLine="true"
+        android:textStyle="bold"
         tools:text="Permissions for version 1.0" />
 
-	<TextView
-		android:id="@+id/permissions_list"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:textSize="13sp"
-		android:singleLine="false"
+    <TextView
+        android:id="@+id/permissions_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:singleLine="false"
         tools:text="    * Full network access
     * View network connections
     * View Wi-Fi connections

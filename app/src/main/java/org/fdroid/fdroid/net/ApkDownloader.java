@@ -65,7 +65,7 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
 
     private ProgressListener listener;
     private AsyncDownloadWrapper dlWrapper = null;
-    private int progress  = 0;
+    private int progress = 0;
     private int totalSize = 0;
     private boolean isComplete = false;
 
@@ -102,7 +102,7 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
     }
 
     public String getRemoteAddress() {
-         return repoAddress + "/" + curApk.apkName.replace(" ", "%20");
+        return repoAddress + "/" + curApk.apkName.replace(" ", "%20");
     }
 
     private Hasher createHasher() {
@@ -204,7 +204,7 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
             // Keep a copy of these ourselves, so people can interrogate us for the
             // info (in addition to receiving events with the info).
             totalSize = event.total;
-            progress  = event.progress;
+            progress = event.progress;
         }
 
         event.getData().putLong(EVENT_SOURCE_ID, id);

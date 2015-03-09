@@ -1,4 +1,3 @@
-
 package org.fdroid.fdroid.localrepo;
 
 import android.annotation.TargetApi;
@@ -77,9 +76,9 @@ public class LocalRepoManager {
     private String uriString = "UNSET";
 
     private static String[] WEB_ROOT_ASSET_FILES = {
-        "swap-icon.png",
-        "swap-tick-done.png",
-        "swap-tick-not-done.png"
+            "swap-icon.png",
+            "swap-tick-done.png",
+            "swap-tick-not-done.png"
     };
 
     private Map<String, App> apps = new HashMap<String, App>();
@@ -198,7 +197,7 @@ public class LocalRepoManager {
         index.delete();
         Utils.symlinkOrCopyFile(new SanitizedFile(new File(symlinkPrefix), "index.html"), index);
 
-        for(String fileName : WEB_ROOT_ASSET_FILES) {
+        for (String fileName : WEB_ROOT_ASSET_FILES) {
             SanitizedFile file = new SanitizedFile(directory, fileName);
             file.delete();
             Utils.symlinkOrCopyFile(new SanitizedFile(new File(symlinkPrefix), fileName), file);

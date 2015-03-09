@@ -56,7 +56,7 @@ abstract public class RepoUpdater {
 
     public RepoUpdater(Context ctx, Repo repo) {
         this.context = ctx;
-        this.repo    = repo;
+        this.repo = repo;
     }
 
     public void setProgressListener(ProgressListener progressListener) {
@@ -201,7 +201,7 @@ abstract public class RepoUpdater {
         }
     }
 
-    private ContentValues prepareRepoDetailsForSaving (RepoXMLHandler handler, String etag) {
+    private ContentValues prepareRepoDetailsForSaving(RepoXMLHandler handler, String etag) {
 
         ContentValues values = new ContentValues();
 
@@ -263,7 +263,7 @@ abstract public class RepoUpdater {
         private ContentValues values;
 
         public void rememberUpdate() {
-             RepoProvider.Helper.update(context, repo, values);
+            RepoProvider.Helper.update(context, repo, values);
         }
 
     }

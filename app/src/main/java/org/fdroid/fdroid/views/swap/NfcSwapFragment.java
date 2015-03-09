@@ -35,7 +35,7 @@ public class NfcSwapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.swap_nfc, container, false);
-        CheckBox dontShowAgain = (CheckBox)view.findViewById(R.id.checkbox_dont_show);
+        CheckBox dontShowAgain = (CheckBox) view.findViewById(R.id.checkbox_dont_show);
         dontShowAgain.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

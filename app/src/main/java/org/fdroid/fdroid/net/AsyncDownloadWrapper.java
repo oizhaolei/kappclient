@@ -20,11 +20,11 @@ public class AsyncDownloadWrapper extends Handler {
 
     private static final String TAG = "org.fdroid.fdroid.net.AsyncDownloadWrapper";
 
-    private static final int MSG_PROGRESS           = 1;
-    private static final int MSG_DOWNLOAD_COMPLETE  = 2;
+    private static final int MSG_PROGRESS = 1;
+    private static final int MSG_DOWNLOAD_COMPLETE = 2;
     private static final int MSG_DOWNLOAD_CANCELLED = 3;
-    private static final int MSG_ERROR              = 4;
-    private static final String MSG_DATA            = "data";
+    private static final int MSG_ERROR = 4;
+    private static final String MSG_DATA = "data";
 
     private Downloader downloader;
     private Listener listener;
@@ -39,7 +39,7 @@ public class AsyncDownloadWrapper extends Handler {
      */
     public AsyncDownloadWrapper(Downloader downloader, Listener listener) {
         this.downloader = downloader;
-        this.listener   = listener;
+        this.listener = listener;
     }
 
     public void fetchTotalDownloadSize() {
@@ -82,6 +82,7 @@ public class AsyncDownloadWrapper extends Handler {
     /**
      * Receives "messages" from the download thread, and passes them onto the
      * relevant {@link org.fdroid.fdroid.net.AsyncDownloadWrapper.Listener}
+     *
      * @param message
      */
     public void handleMessage(Message message) {
@@ -100,9 +101,13 @@ public class AsyncDownloadWrapper extends Handler {
 
     public interface Listener extends ProgressListener {
         public void onReceiveTotalDownloadSize(int size);
+
         public void onReceiveCacheTag(String cacheTag);
+
         public void onErrorDownloading(String localisedExceptionDetails);
+
         public void onDownloadComplete();
+
         public void onDownloadCancelled();
     }
 
@@ -135,7 +140,7 @@ public class AsyncDownloadWrapper extends Handler {
         @Override
         public void onProgress(Event event) {
             Message message = new Message();
-            Bundle  data    = new Bundle();
+            Bundle data = new Bundle();
             data.putParcelable(MSG_DATA, event);
             message.setData(data);
             message.arg1 = MSG_PROGRESS;
