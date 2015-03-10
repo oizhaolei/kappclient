@@ -19,7 +19,7 @@ public class HttpServer extends HttpConnection {
 
     public List<App> getApps(String lastQueryTime) throws Exception {
         Map<String, String> params = new HashMap<>();
-        params.put("lastQueryTime",lastQueryTime);
+        params.put("last_query_time",lastQueryTime);
 
         Response res = _get("user.php", params);
                 JSONArray items =  res.asJSONArray();

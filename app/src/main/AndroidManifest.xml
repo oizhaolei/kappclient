@@ -323,7 +323,7 @@
         </receiver>
 
         <service android:name="org.fdroid.fdroid.UpdateService" />
-        <service android:name="org.fdroid.fdroid.net.WifiStateChangeService" />
+        <!--<service android:name="org.fdroid.fdroid.net.WifiStateChangeService" />-->
         <service android:name="org.fdroid.fdroid.localrepo.LocalRepoService" />
     </application>
 

@@ -55,6 +55,8 @@ import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.updater.RepoUpdater;
+import org.fdroid.fdroid.updater.UpdateException;
+import org.fdroid.fdroid.updater.Updater;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -350,7 +352,7 @@ public class UpdateService extends IntentService implements ProgressListener {
             boolean changes = false;
 
 
-                RepoUpdater updater = RepoUpdater.createUpdaterFor(getBaseContext());
+                Updater updater = RepoUpdater.createUpdaterFor(getBaseContext());
                 updater.setProgressListener(this);
                 try {
                     updater.update();
@@ -361,7 +363,7 @@ public class UpdateService extends IntentService implements ProgressListener {
                         apksToUpdate.addAll(updater.getApks());
                         changes = true;
                     }
-                } catch (RepoUpdater.UpdateException e) {
+                } catch (UpdateException e) {
                     repoErrors.add(e.getMessage());
                     Log.e("FDroid", Log.getStackTraceString(e));
                 }
@@ -373,6 +375,11 @@ public class UpdateService extends IntentService implements ProgressListener {
 
                 List<App> listOfAppsToUpdate = new ArrayList<App>();
                 listOfAppsToUpdate.addAll(appsToUpdate.values());
+
+                int totalInsertsUpdates = listOfAppsToUpdate.size() + apksToUpdate.size();
+
+                updateOrInsertApps(listOfAppsToUpdate, totalInsertsUpdates, 0);
+                updateOrInsertApks(apksToUpdate, totalInsertsUpdates, listOfAppsToUpdate.size());
 
                 calcApkCompatibilityFlags(this, apksToUpdate);
 

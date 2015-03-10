@@ -28,7 +28,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-abstract public class RepoUpdater {
+abstract public class RepoUpdater implements Updater {
 
     public static final String PROGRESS_TYPE_PROCESS_XML = "processingXml";
 
@@ -74,7 +74,7 @@ abstract public class RepoUpdater {
      * or if the file is not compressed, you can just return a reference to
      * the downloaded file.
      *
-     * @throws org.fdroid.fdroid.updater.RepoUpdater.UpdateException All error states will come from here.
+     * @throws org.fdroid.fdroid.updater.UpdateException All error states will come from here.
      */
     protected abstract File getIndexFromFile(File downloadedFile) throws
             UpdateException;
@@ -190,18 +190,5 @@ abstract public class RepoUpdater {
         }
     }
 
-
-    public static class UpdateException extends Exception {
-
-        private static final long serialVersionUID = -4492452418826132803L;
-
-        public UpdateException(String message) {
-            super(message);
-        }
-
-        public UpdateException(String message, Exception cause) {
-            super(message, cause);
-        }
-    }
 
 }
