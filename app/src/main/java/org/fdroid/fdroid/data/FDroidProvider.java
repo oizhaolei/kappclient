@@ -7,9 +7,16 @@ import android.content.ContentProviderResult;
 import android.content.ContentValues;
 import android.content.OperationApplicationException;
 import android.content.UriMatcher;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteCursor;
+import android.database.sqlite.SQLiteCursorDriver;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQuery;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
+
+import com.ruptech.k_app.BuildConfig;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,6 +37,8 @@ public abstract class FDroidProvider extends ContentProvider {
     abstract protected String getTableName();
 
     abstract protected String getProviderName();
+
+    private static final String TAG =  FDroidProvider.class.getSimpleName();
 
     /**
      * Should always be the same as the provider:name in the AndroidManifest
@@ -68,9 +77,19 @@ public abstract class FDroidProvider extends ContentProvider {
         return result;
     }
 
+    public static SQLiteDatabase.CursorFactory mCursorFactory = new SQLiteDatabase.CursorFactory() {
+        @Override
+        public Cursor newCursor(SQLiteDatabase db, SQLiteCursorDriver driver,
+                                String editTable, SQLiteQuery query) {
+            if (BuildConfig.DEBUG)
+                Log.i(TAG, query.toString());
+            return new SQLiteCursor(db, driver, editTable, query);
+        }
+    };
+
     @Override
     public boolean onCreate() {
-        dbHelper = new DBHelper(getContext());
+        dbHelper = new DBHelper(getContext(), mCursorFactory);
         return true;
     }
 

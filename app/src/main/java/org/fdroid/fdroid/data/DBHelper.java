@@ -92,10 +92,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private Context context;
 
-    public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, DB_VERSION);
+    public DBHelper(Context context, SQLiteDatabase.CursorFactory cf) {
+        super(context, DATABASE_NAME, cf, DB_VERSION);
         this.context = context;
     }
+
 
 
 
