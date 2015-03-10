@@ -9,8 +9,8 @@ import java.io.File;
 
 public class UnsignedRepoUpdater extends RepoUpdater {
 
-    public UnsignedRepoUpdater(Context ctx, Repo repo) {
-        super(ctx, repo);
+    public UnsignedRepoUpdater(Context ctx) {
+        super(ctx);
     }
 
     @Override
@@ -21,6 +21,6 @@ public class UnsignedRepoUpdater extends RepoUpdater {
 
     @Override
     protected String getIndexAddress() {
-        return repo.address + "/index.xml";
+        return Repo.address + "/index.xml";
     }
 }

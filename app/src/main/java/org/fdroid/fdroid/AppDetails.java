@@ -73,7 +73,6 @@ import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.InstalledAppProvider;
 import org.fdroid.fdroid.data.Repo;
-import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.installer.Installer;
 import org.fdroid.fdroid.installer.Installer.AndroidNotCompatibleException;
 import org.fdroid.fdroid.installer.Installer.InstallerCallback;
@@ -834,12 +833,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
     // Install the version of this app denoted by 'app.curApk'.
     @Override
     public void install(final Apk apk) {
-        String[] projection = {RepoProvider.DataColumns.ADDRESS};
-        Repo repo = RepoProvider.Helper.findById(this, apk.repo, projection);
-        if (repo == null || repo.address == null) {
-            return;
-        }
-        final String repoaddress = repo.address;
+        final String repoaddress = Repo.address;
 
         if (!apk.compatible) {
             AlertDialog.Builder ask_alrt = new AlertDialog.Builder(this);

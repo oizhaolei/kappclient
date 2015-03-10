@@ -24,31 +24,31 @@ public class SignedRepoUpdater extends RepoUpdater {
 
     private static final String TAG = "org.fdroid.fdroid.updater.SignedRepoUpdater";
 
-    public SignedRepoUpdater(Context ctx, Repo repo) {
-        super(ctx, repo);
+    public SignedRepoUpdater(Context ctx) {
+        super(ctx);
     }
 
     private boolean verifyCerts(JarEntry item) throws UpdateException {
         Certificate[] certs = item.getCertificates();
         if (certs == null || certs.length == 0) {
-            throw new UpdateException(repo, "No signature found in index");
+            throw new UpdateException( "No signature found in index");
         }
 
         Log.d(TAG, "Index has " + certs.length + " signature(s)");
         boolean match = false;
         for (Certificate cert : certs) {
             String certdata = Hasher.hex(cert);
-            if (repo.pubkey == null && repo.fingerprint != null) {
+            if (Repo.pubkey == null && Repo.fingerprint != null) {
                 String certFingerprint = Utils.calcFingerprint(cert);
-                Log.d(TAG, "No public key for repo " + repo.address + " yet, but it does have a fingerprint, so comparing them.");
-                Log.d(TAG, "Repo fingerprint: " + repo.fingerprint);
+                Log.d(TAG, "No public key for repo " + Repo.address + " yet, but it does have a fingerprint, so comparing them.");
+                Log.d(TAG, "Repo fingerprint: " + Repo.fingerprint);
                 Log.d(TAG, "Cert fingerprint: " + certFingerprint);
-                if (repo.fingerprint.equalsIgnoreCase(certFingerprint)) {
-                    repo.pubkey = certdata;
+                if (Repo.fingerprint.equalsIgnoreCase(certFingerprint)) {
+                    Repo.pubkey = certdata;
                     usePubkeyInJar = true;
                 }
             }
-            if (repo.pubkey != null && repo.pubkey.equals(certdata)) {
+            if (Repo.pubkey != null && Repo.pubkey.equals(certdata)) {
                 Log.d(TAG, "Checking repo public key against cert found in jar.");
                 match = true;
                 break;
@@ -87,14 +87,14 @@ public class SignedRepoUpdater extends RepoUpdater {
             // completely, so we put it after the copy above...
             if (!verifyCerts(indexEntry)) {
                 indexFile.delete();
-                throw new UpdateException(repo, "Index signature mismatch");
+                throw new UpdateException("Index signature mismatch");
             }
         } catch (IOException e) {
             if (indexFile != null) {
                 indexFile.delete();
             }
             throw new UpdateException(
-                    repo, "Error opening signed index", e);
+                    "Error opening signed index", e);
         } finally {
             if (jarFile != null) {
                 try {
@@ -110,7 +110,7 @@ public class SignedRepoUpdater extends RepoUpdater {
 
     @Override
     protected String getIndexAddress() {
-        return repo.address + "/index.jar?client_version=" + context.getString(R.string.version_name);
+        return Repo.address + "/index.jar?client_version=" + context.getString(R.string.version_name);
     }
 
     /**
@@ -121,7 +121,7 @@ public class SignedRepoUpdater extends RepoUpdater {
     protected File getIndexFromFile(File downloadedFile) throws
             UpdateException {
         Date updateTime = new Date(System.currentTimeMillis());
-        Log.d(TAG, "Getting signed index from " + repo.address + " at " +
+        Log.d(TAG, "Getting signed index from " + Repo.address + " at " +
                 Utils.LOG_DATE_FORMAT.format(updateTime));
 
         File indexJar = downloadedFile;

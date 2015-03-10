@@ -54,8 +54,6 @@ import org.fdroid.fdroid.data.ApkProvider;
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.Repo;
-import org.fdroid.fdroid.data.RepoProvider;
-import org.fdroid.fdroid.net.Downloader;
 import org.fdroid.fdroid.updater.RepoUpdater;
 
 import java.util.ArrayList;
@@ -344,30 +342,15 @@ public class UpdateService extends IntentService implements ProgressListener {
 
             // Grab some preliminary information, then we can release the
             // database while we do all the downloading, etc...
-            List<Repo> repos = RepoProvider.Helper.all(this);
 
             // Process each repo...
             Map<String, App> appsToUpdate = new HashMap<String, App>();
             List<Apk> apksToUpdate = new ArrayList<Apk>();
-            List<Repo> unchangedRepos = new ArrayList<Repo>();
-            List<Repo> updatedRepos = new ArrayList<Repo>();
-            List<Repo> disabledRepos = new ArrayList<Repo>();
-            ArrayList<CharSequence> errorRepos = new ArrayList<CharSequence>();
             ArrayList<CharSequence> repoErrors = new ArrayList<CharSequence>();
-            List<RepoUpdater.RepoUpdateRememberer> repoUpdateRememberers = new ArrayList<RepoUpdater.RepoUpdateRememberer>();
             boolean changes = false;
-            for (final Repo repo : repos) {
 
-                if (!repo.inuse) {
-                    disabledRepos.add(repo);
-                    continue;
-                } else if (!TextUtils.isEmpty(address) && !repo.address.equals(address)) {
-                    unchangedRepos.add(repo);
-                    continue;
-                }
 
-                sendStatus(STATUS_INFO, getString(R.string.status_connecting_to_repo, repo.address));
-                RepoUpdater updater = RepoUpdater.createUpdaterFor(getBaseContext(), repo);
+                RepoUpdater updater = RepoUpdater.createUpdaterFor(getBaseContext());
                 updater.setProgressListener(this);
                 try {
                     updater.update();
@@ -376,19 +359,12 @@ public class UpdateService extends IntentService implements ProgressListener {
                             appsToUpdate.put(app.id, app);
                         }
                         apksToUpdate.addAll(updater.getApks());
-                        updatedRepos.add(repo);
                         changes = true;
-                        repoUpdateRememberers.add(updater.getRememberer());
-                    } else {
-                        unchangedRepos.add(repo);
                     }
                 } catch (RepoUpdater.UpdateException e) {
-                    errorRepos.add(repo.address);
                     repoErrors.add(e.getMessage());
-                    Log.e("FDroid", "Error updating repository " + repo.address + ": " + e.getMessage());
                     Log.e("FDroid", Log.getStackTraceString(e));
                 }
-            }
 
             if (!changes) {
                 Log.d("FDroid", "Not checking app details or compatibility, because all repos were up to date.");
@@ -400,17 +376,6 @@ public class UpdateService extends IntentService implements ProgressListener {
 
                 calcApkCompatibilityFlags(this, apksToUpdate);
 
-                // Need to do this BEFORE updating the apks, otherwise when it continually
-                // calls "get existing apks for repo X" then it will be getting the newly
-                // created apks, rather than those from the fresh, juicy index we just processed.
-                removeApksNoLongerInRepo(apksToUpdate, updatedRepos);
-
-                int totalInsertsUpdates = listOfAppsToUpdate.size() + apksToUpdate.size();
-                updateOrInsertApps(listOfAppsToUpdate, totalInsertsUpdates, 0);
-                updateOrInsertApks(apksToUpdate, totalInsertsUpdates, listOfAppsToUpdate.size());
-                removeApksFromRepos(disabledRepos);
-                removeAppsWithoutApks();
-
                 // This will sort out the icon urls, compatibility flags. and suggested version
                 // for each app. It used to happen here in Java code, but was moved to SQL when
                 // it became apparant we don't always have enough info (depending on which repos
@@ -419,10 +384,6 @@ public class UpdateService extends IntentService implements ProgressListener {
 
                 notifyContentProviders();
 
-                //we only remember the update if everything has gone well
-                for (RepoUpdater.RepoUpdateRememberer rememberer : repoUpdateRememberers) {
-                    rememberer.rememberUpdate();
-                }
 
                 if (prefs.getBoolean(Preferences.PREF_UPD_NOTIFY, true)) {
                     performUpdateNotification(appsToUpdate.values());
@@ -433,19 +394,11 @@ public class UpdateService extends IntentService implements ProgressListener {
             e.putLong(Preferences.PREF_UPD_LAST, System.currentTimeMillis());
             e.commit();
 
-            if (errorRepos.isEmpty()) {
                 if (changes) {
                     sendStatus(STATUS_COMPLETE_WITH_CHANGES);
                 } else {
                     sendStatus(STATUS_COMPLETE_AND_SAME);
                 }
-            } else {
-                if (updatedRepos.size() + unchangedRepos.size() == 0) {
-                    sendRepoErrorStatus(STATUS_ERROR_LOCAL, repoErrors);
-                } else {
-                    sendRepoErrorStatus(STATUS_ERROR_LOCAL_SMALL, repoErrors);
-                }
-            }
         } catch (Exception e) {
             Log.e("FDroid",
                     "Exception during update processing:\n"
@@ -767,18 +720,5 @@ public class UpdateService extends IntentService implements ProgressListener {
      */
     @Override
     public void onProgress(ProgressListener.Event event) {
-        String message = "";
-        // TODO: Switch to passing through Bundles of data with the event, rather than a repo address. They are
-        // now much more general purpose then just repo downloading.
-        String repoAddress = event.getData().getString(RepoUpdater.PROGRESS_DATA_REPO_ADDRESS);
-        if (event.type.equals(Downloader.EVENT_PROGRESS)) {
-            String downloadedSize = Utils.getFriendlySize(event.progress);
-            String totalSize = Utils.getFriendlySize(event.total);
-            int percent = (int) ((double) event.progress / event.total * 100);
-            message = getString(R.string.status_download, repoAddress, downloadedSize, totalSize, percent);
-        } else if (event.type.equals(RepoUpdater.PROGRESS_TYPE_PROCESS_XML)) {
-            message = getString(R.string.status_processing_xml, repoAddress, event.progress, event.total);
-        }
-        sendStatus(STATUS_INFO, message);
     }
 }

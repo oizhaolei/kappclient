@@ -100,10 +100,6 @@ public class Apk extends ValueObject implements Comparable<Apk> {
                 version = cursor.getString(i);
             } else if (column.equals(ApkProvider.DataColumns.VERSION_CODE)) {
                 vercode = cursor.getInt(i);
-            } else if (column.equals(ApkProvider.DataColumns.REPO_VERSION)) {
-                repoVersion = cursor.getInt(i);
-            } else if (column.equals(ApkProvider.DataColumns.REPO_ADDRESS)) {
-                repoAddress = cursor.getString(i);
             }
         }
     }

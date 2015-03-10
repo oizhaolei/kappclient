@@ -47,7 +47,6 @@ import com.ruptech.k_app.R;
 import org.fdroid.fdroid.compat.TabManager;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.views.AppListFragmentPagerAdapter;
-import org.fdroid.fdroid.views.ManageReposActivity;
 
 public class FDroid extends ActionBarActivity {
 
@@ -143,11 +142,6 @@ public class FDroid extends ActionBarActivity {
                 updateRepos();
                 return true;
 
-            case R.id.action_manage_repos:
-                Intent i = new Intent(this, ManageReposActivity.class);
-                startActivityForResult(i, REQUEST_MANAGEREPOS);
-                return true;
-
             case R.id.action_settings:
                 Intent prefs = new Intent(getBaseContext(), PreferencesActivity.class);
                 startActivityForResult(prefs, REQUEST_PREFS);
@@ -229,32 +223,6 @@ public class FDroid extends ActionBarActivity {
 
         switch (requestCode) {
             case REQUEST_APPDETAILS:
-                break;
-            case REQUEST_MANAGEREPOS:
-                if (data != null && data.hasExtra(ManageReposActivity.REQUEST_UPDATE)) {
-                    Builder ask_alrt = new Builder(this);
-                    ask_alrt.setTitle(getString(R.string.repo_update_title));
-                    ask_alrt.setIcon(android.R.drawable.ic_menu_rotate);
-                    ask_alrt.setMessage(getString(R.string.repo_alrt));
-                    ask_alrt.setPositiveButton(getString(R.string.yes),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int whichButton) {
-                                    updateRepos();
-                                }
-                            });
-                    ask_alrt.setNegativeButton(getString(R.string.no),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int whichButton) {
-                                    // do nothing
-                                }
-                            });
-                    AlertDialog alert = ask_alrt.create();
-                    alert.show();
-                }
                 break;
             case REQUEST_PREFS:
                 // The automatic update settings may have changed, so reschedule (or

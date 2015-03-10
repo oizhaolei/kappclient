@@ -36,7 +36,6 @@ import java.util.List;
 public class RepoXMLHandler extends DefaultHandler {
 
     // The repo we're processing.
-    private Repo repo;
 
     private List<App> apps = new ArrayList<App>();
     private List<Apk> apksList = new ArrayList<Apk>();
@@ -65,8 +64,7 @@ public class RepoXMLHandler extends DefaultHandler {
 
     private int totalAppCount;
 
-    public RepoXMLHandler(Repo repo, ProgressListener listener) {
-        this.repo = repo;
+    public RepoXMLHandler(ProgressListener listener) {
         pubkey = null;
         name = null;
         description = null;
@@ -294,7 +292,7 @@ public class RepoXMLHandler extends DefaultHandler {
             /* show progress for the first 25, then start skipping every 25 */
             if (totalAppCount < 25 || progressCounter % (totalAppCount / 25) == 0) {
                 Bundle data = new Bundle(1);
-                data.putString(RepoUpdater.PROGRESS_DATA_REPO_ADDRESS, repo.address);
+                data.putString(RepoUpdater.PROGRESS_DATA_REPO_ADDRESS, Repo.address);
                 progressListener.onProgress(
                         new ProgressListener.Event(
                                 RepoUpdater.PROGRESS_TYPE_PROCESS_XML,
@@ -304,7 +302,7 @@ public class RepoXMLHandler extends DefaultHandler {
         } else if (localName.equals("package") && curapp != null && curapk == null) {
             curapk = new Apk();
             curapk.id = curapp.id;
-            curapk.repo = repo.getId();
+            curapk.repo = Repo.getId();
             hashType = null;
 
         } else if (localName.equals("hash") && curapk != null) {

@@ -695,7 +695,6 @@ public class AppProvider extends FDroidProvider {
         updateCompatibleFlags();
         updateSuggestedFromLatest();
         updateSuggestedFromUpstream();
-        updateIconUrls();
     }
 
     /**
@@ -827,62 +826,5 @@ public class AppProvider extends FDroidProvider {
         write().execSQL(updateSql);
     }
 
-    private void updateIconUrls() {
-
-        Log.d("FDroid", "Updating icon paths for apps belonging to repos with version >= " + Repo.VERSION_DENSITY_SPECIFIC_ICONS);
-        String iconsDir = Utils.getIconsDir(getContext());
-        Log.d("FDroid", "Using icon dir '" + iconsDir + "'");
-        String repoVersion = Integer.toString(Repo.VERSION_DENSITY_SPECIFIC_ICONS);
-        String query = getIconUpdateQuery();
-        String[] params = {repoVersion, iconsDir};
-        write().execSQL(query, params);
-    }
-
-    /**
-     * Returns a query which requires two parameters to be bound. These are (in order):
-     * 1) The repo version that introduced density specific icons
-     * 2) The dir to density specific icons for the current device.
-     */
-    private String getIconUpdateQuery() {
-
-        final String apk = DBHelper.TABLE_APK;
-        final String app = DBHelper.TABLE_APP;
-        final String repo = DBHelper.TABLE_REPO;
-
-        return
-                " UPDATE " + app + " SET iconUrl = ( " +
-                        " SELECT " +
-
-                        // Concatenate (using the "||" operator) the address, the icons directory (bound to the ? as the
-                        // second parameter when executing the query) and the icon path.
-                        " ( " +
-                        repo + ".address " +
-                        " || " +
-
-                        // If the repo has the relevant version, then use a more intelligent icons dir,
-                        // otherwise revert to '/icons/'
-                        " CASE WHEN " + repo + ".version >= ? THEN ? ELSE '/icons/' END " +
-
-                        " || " +
-                        app + ".icon " +
-                        ") " +
-                        " FROM " +
-                        apk +
-                        " JOIN " + repo + " ON (" + repo + "._id = " + apk + ".repo) " +
-                        " WHERE " +
-                        app + ".id = " + apk + ".id AND " +
-                        apk + ".vercode = ( " +
-
-                        // We only want the latest apk here. Ideally, we should instead join
-                        // onto apk.suggestedVercode, but as per https://gitlab.com/fdroid/fdroidclient/issues/1
-                        // there may be some situations where suggestedVercode isn't set.
-                        // TODO: If we can guarantee that suggestedVercode is set, then join onto that instead.
-                        // This will save from doing a futher sub query for each app.
-                        " SELECT MAX(inner_apk.vercode)  " +
-                        " FROM fdroid_apk as inner_apk " +
-                        " WHERE inner_apk.id = fdroid_apk.id ) " +
-                        " AND fdroid_apk.repo = fdroid_repo._id " +
-                        " ) ";
-    }
 
 }

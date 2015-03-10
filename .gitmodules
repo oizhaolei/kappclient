@@ -1,0 +1,4 @@
+[submodule "extern/android-support-v4-preferencefragment"]
+	path = extern/android-support-v4-preferencefragment
+	url = https://github.com/CyberEagle/android-support-v4-preferencefragment.git
+	ignore = dirty

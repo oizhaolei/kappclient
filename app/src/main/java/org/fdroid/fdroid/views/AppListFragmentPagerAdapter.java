@@ -33,13 +33,16 @@ public class AppListFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        if (i == 0) {
-            return new AvailableAppsFragment();
+        switch (i) {
+            case 0:
+                return  new AvailableAppsFragment();
+            case 1:
+                return new InstalledAppsFragment();
+            case 2:
+                return new CanUpdateAppsFragment();
+            default:
+                return null;
         }
-        if (i == 1) {
-            return new InstalledAppsFragment();
-        }
-        return new CanUpdateAppsFragment();
     }
 
     @Override

@@ -13,11 +13,6 @@
         android:title="@string/menu_update_repo"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_manage_repos"
-        android:icon="@android:drawable/ic_menu_agenda"
-        android:title="@string/menu_manage"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/action_bluetooth_apk"
         android:icon="@android:drawable/stat_sys_data_bluetooth"
         android:title="@string/menu_send_apk_bt"

@@ -1,8 +1,6 @@
 package org.fdroid.fdroid.views.swap;
 
 import android.app.Activity;
-import android.content.ContentValues;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,7 +14,6 @@ import org.fdroid.fdroid.ProgressListener;
 import org.fdroid.fdroid.UpdateService;
 import org.fdroid.fdroid.data.NewRepoConfig;
 import org.fdroid.fdroid.data.Repo;
-import org.fdroid.fdroid.data.RepoProvider;
 
 public class ConfirmReceiveSwapFragment extends Fragment implements ProgressListener {
 
@@ -62,29 +59,9 @@ public class ConfirmReceiveSwapFragment extends Fragment implements ProgressList
     }
 
     private void confirm() {
-        Repo repo = ensureRepoExists();
-        UpdateService.updateRepoNow(repo.address, getActivity()).setListener(this);
+        UpdateService.updateRepoNow(Repo.address, getActivity()).setListener(this);
     }
 
-    private Repo ensureRepoExists() {
-        // TODO: newRepoConfig.getUri() will include a fingerprint, which may not match with
-        // the repos address in the database.
-        Repo repo = RepoProvider.Helper.findByAddress(getActivity(), newRepoConfig.getUriString());
-        if (repo == null) {
-            ContentValues values = new ContentValues(5);
-
-            // TODO: i18n and think about most appropriate name. Although ideally, it will not be seen often,
-            // because we're whacking a pretty UI over the swap process so they don't need to "Manage repos"...
-            values.put(RepoProvider.DataColumns.NAME, "Swap");
-            values.put(RepoProvider.DataColumns.ADDRESS, newRepoConfig.getUriString());
-            values.put(RepoProvider.DataColumns.DESCRIPTION, ""); // TODO;
-            values.put(RepoProvider.DataColumns.FINGERPRINT, newRepoConfig.getFingerprint());
-            values.put(RepoProvider.DataColumns.IN_USE, true);
-            Uri uri = RepoProvider.Helper.insert(getActivity(), values);
-            repo = RepoProvider.Helper.findByUri(getActivity(), uri);
-        }
-        return repo;
-    }
 
     @Override
     public void onProgress(Event event) {

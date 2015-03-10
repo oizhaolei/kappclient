@@ -164,14 +164,12 @@ public class ApkProvider extends FDroidProvider {
         public static String ADDED_DATE = "added";
         public static String IS_COMPATIBLE = "compatible";
         public static String INCOMPATIBLE_REASONS = "incompatibleReasons";
-        public static String REPO_VERSION = "repoVersion";
-        public static String REPO_ADDRESS = "repoAddress";
 
         public static String[] ALL = {
                 _ID, APK_ID, VERSION, REPO_ID, HASH, VERSION_CODE, NAME, SIZE,
                 SIGNATURE, SOURCE_NAME, MIN_SDK_VERSION, MAX_SDK_VERSION,
                 PERMISSIONS, FEATURES, NATIVE_CODE, HASH_TYPE, ADDED_DATE,
-                IS_COMPATIBLE, REPO_VERSION, REPO_ADDRESS, INCOMPATIBLE_REASONS
+                IS_COMPATIBLE, INCOMPATIBLE_REASONS
         };
     }
 
@@ -187,11 +185,8 @@ public class ApkProvider extends FDroidProvider {
 
     private static final UriMatcher matcher = new UriMatcher(-1);
 
-    public static Map<String, String> REPO_FIELDS = new HashMap<String, String>();
 
     static {
-        REPO_FIELDS.put(DataColumns.REPO_VERSION, RepoProvider.DataColumns.VERSION);
-        REPO_FIELDS.put(DataColumns.REPO_ADDRESS, RepoProvider.DataColumns.ADDRESS);
 
         matcher.addURI(getAuthority(), PATH_REPO + "/#", CODE_REPO);
         matcher.addURI(getAuthority(), PATH_APK + "/#/*", CODE_SINGLE);
@@ -278,9 +273,7 @@ public class ApkProvider extends FDroidProvider {
 
         @Override
         public void addField(String field) {
-            if (REPO_FIELDS.containsKey(field)) {
-                addRepoField(REPO_FIELDS.get(field), field);
-            } else if (field.equals(DataColumns._ID)) {
+            if (field.equals(DataColumns._ID)) {
                 appendField("rowid", "apk", "_id");
             } else if (field.equals(DataColumns._COUNT)) {
                 appendField("COUNT(*) AS " + DataColumns._COUNT);
@@ -290,15 +283,6 @@ public class ApkProvider extends FDroidProvider {
                 appendField(field, "apk");
             }
         }
-
-        private void addRepoField(String field, String alias) {
-            if (!repoTableRequired) {
-                repoTableRequired = true;
-                leftJoin(DBHelper.TABLE_REPO, "repo", "apk.repo = repo._id");
-            }
-            appendField(field, "repo", alias);
-        }
-
     }
 
     private QuerySelection queryApp(String appId) {
@@ -389,21 +373,9 @@ public class ApkProvider extends FDroidProvider {
         return cursor;
     }
 
-    private static void removeRepoFields(ContentValues values) {
-        for (Map.Entry<String, String> repoField : REPO_FIELDS.entrySet()) {
-            String field = repoField.getKey();
-            if (values.containsKey(field)) {
-                Log.i("FDroid", "Cannot insert/update '" + field + "' field " +
-                        "on apk table, as it belongs to the repo table. " +
-                        "This field will be ignored.");
-                values.remove(field);
-            }
-        }
-    }
 
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        removeRepoFields(values);
         validateFields(DataColumns.ALL, values);
         write().insertOrThrow(getTableName(), null, values);
         if (!isApplyingBatch()) {
@@ -459,7 +431,6 @@ public class ApkProvider extends FDroidProvider {
         }
 
         validateFields(DataColumns.ALL, values);
-        removeRepoFields(values);
 
         QuerySelection query = new QuerySelection(where, whereArgs);
         query = query.add(querySingle(uri));
