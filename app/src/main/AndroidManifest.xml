@@ -316,15 +316,10 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
-        <receiver android:name="org.fdroid.fdroid.WifiStateChangeReceiver">
-            <intent-filter>
-                <action android:name="android.net.wifi.STATE_CHANGE" />
-            </intent-filter>
-        </receiver>
 
         <service android:name="org.fdroid.fdroid.UpdateService" />
         <!--<service android:name="org.fdroid.fdroid.net.WifiStateChangeService" />-->
-        <service android:name="org.fdroid.fdroid.localrepo.LocalRepoService" />
+        <!--<service android:name="org.fdroid.fdroid.localrepo.LocalRepoService" />-->
     </application>
 
 </manifest>

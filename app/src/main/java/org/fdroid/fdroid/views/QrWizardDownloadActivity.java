@@ -3,7 +3,6 @@ package org.fdroid.fdroid.views;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
@@ -19,7 +18,6 @@ import com.ruptech.k_app.R;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.QrGenAsyncTask;
-import org.fdroid.fdroid.net.WifiStateChangeService;
 
 public class QrWizardDownloadActivity extends ActionBarActivity {
 
@@ -47,8 +45,8 @@ public class QrWizardDownloadActivity extends ActionBarActivity {
     public void onResume() {
         super.onResume();
         resetNetworkInfo();
-        LocalBroadcastManager.getInstance(this).registerReceiver(onWifiChange,
-                new IntentFilter(WifiStateChangeService.BROADCAST));
+//        LocalBroadcastManager.getInstance(this).registerReceiver(onWifiChange,
+//                new IntentFilter(WifiStateChangeService.BROADCAST));
     }
 
     @Override

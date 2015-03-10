@@ -24,7 +24,6 @@ import android.app.Application;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
@@ -33,12 +32,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.IBinder;
-import android.os.Message;
 import android.os.Messenger;
-import android.os.RemoteException;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
@@ -51,14 +47,11 @@ import com.ruptech.k_app.R;
 import com.ruptech.k_app.http.HttpServer;
 import com.ruptech.k_app.utils.AssetsPropertyReader;
 
-import org.fdroid.fdroid.Preferences.ChangeListener;
 import org.fdroid.fdroid.compat.PRNGFixes;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.InstalledAppCacheUpdater;
 import org.fdroid.fdroid.data.Repo;
-import org.fdroid.fdroid.localrepo.LocalRepoService;
 import org.fdroid.fdroid.net.IconDownloader;
-import org.fdroid.fdroid.net.WifiStateChangeService;
 
 import java.io.File;
 import java.security.Security;
@@ -128,6 +121,7 @@ public class FDroidApp extends Application {
             Security.addProvider(spongyCastleProvider);
         }
     }
+
     static public Properties properties;
 
     public static void disableSpongyCastleOnLollipop() {
@@ -135,6 +129,7 @@ public class FDroidApp extends Application {
             Security.removeProvider(spongyCastleProvider.getName());
         }
     }
+
     private static HttpServer httpServer;
 
     public static HttpServer getHttpServer() {
@@ -225,21 +220,6 @@ public class FDroidApp extends Application {
                 .build();
         ImageLoader.getInstance().init(config);
 
-        // TODO reintroduce PinningTrustManager and MemorizingTrustManager
-
-        // initialized the local repo information
-        WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
-        int wifiState = wifiManager.getWifiState();
-        if (wifiState == WifiManager.WIFI_STATE_ENABLING
-                || wifiState == WifiManager.WIFI_STATE_ENABLED)
-            startService(new Intent(this, WifiStateChangeService.class));
-        // if the HTTPS pref changes, then update all affected things
-        Preferences.get().registerLocalRepoHttpsListeners(new ChangeListener() {
-            @Override
-            public void onPreferenceChange() {
-                startService(new Intent(FDroidApp.this, WifiStateChangeService.class));
-            }
-        });
     }
 
     @TargetApi(18)
@@ -306,37 +286,4 @@ public class FDroidApp extends Application {
         }
     };
 
-    public static void startLocalRepoService(Context context) {
-        if (!localRepoServiceIsBound) {
-            Context app = context.getApplicationContext();
-            Intent service = new Intent(app, LocalRepoService.class);
-            localRepoServiceIsBound = app.bindService(service, serviceConnection, Context.BIND_AUTO_CREATE);
-            if (localRepoServiceIsBound)
-                app.startService(service);
-        }
-    }
-
-    public static void stopLocalRepoService(Context context) {
-        Context app = context.getApplicationContext();
-        if (localRepoServiceIsBound) {
-            app.unbindService(serviceConnection);
-            localRepoServiceIsBound = false;
-        }
-        app.stopService(new Intent(app, LocalRepoService.class));
-    }
-
-    public static void restartLocalRepoService() {
-        if (localRepoServiceMessenger != null) {
-            try {
-                Message msg = Message.obtain(null, LocalRepoService.RESTART, LocalRepoService.RESTART, 0);
-                localRepoServiceMessenger.send(msg);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public static boolean isLocalRepoServiceRunning() {
-        return localRepoServiceIsBound;
-    }
 }

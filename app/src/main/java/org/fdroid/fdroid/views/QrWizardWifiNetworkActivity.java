@@ -20,7 +20,6 @@ import com.ruptech.k_app.R;
 
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.QrGenAsyncTask;
-import org.fdroid.fdroid.net.WifiStateChangeService;
 
 public class QrWizardWifiNetworkActivity extends ActionBarActivity {
     private static final String TAG = "org.fdroid.fdroid.QrWizardWifiNetworkActivity";
@@ -34,7 +33,6 @@ public class QrWizardWifiNetworkActivity extends ActionBarActivity {
 
         wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         wifiManager.setWifiEnabled(true);
-        FDroidApp.startLocalRepoService(this);
 
         setContentView(R.layout.qr_wizard_activity);
         TextView instructions = (TextView) findViewById(R.id.qrWizardInstructions);
@@ -55,8 +53,6 @@ public class QrWizardWifiNetworkActivity extends ActionBarActivity {
     public void onResume() {
         super.onResume();
         resetNetworkInfo();
-        LocalBroadcastManager.getInstance(this).registerReceiver(onWifiChange,
-                new IntentFilter(WifiStateChangeService.BROADCAST));
     }
 
     @Override
