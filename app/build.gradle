@@ -26,5 +26,5 @@ dependencies {
     compile 'com.github.kevinsawicki:http-request:5.6'
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'eu.chainfire:libsuperuser:1.0.0.+'
-    compile project(':android-support-v4-preferencefragment')
+    compile project(':extern:android-support-v4-preferencefragment')
 }
