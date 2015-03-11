@@ -20,7 +20,7 @@ public class RetrieveAppsTask extends GenericTask {
 
 	@Override
 	protected TaskResult _doInBackground() throws Exception {
-		appList = FDroidApp.getHttpServer().getApps(lastRetrieveTime);
+//		appList = FDroidApp.getHttpServer().getApps(lastRetrieveTime, apps, apks);
 		return TaskResult.OK;
 	}
 

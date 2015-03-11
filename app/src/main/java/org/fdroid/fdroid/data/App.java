@@ -16,6 +16,7 @@ import android.util.Log;
 import org.fdroid.fdroid.AppFilter;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Utils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -105,8 +106,8 @@ public class App extends ValueObject implements Comparable<App> {
 
     public Apk installedApk; // might be null if not installed
 
-    public App(JSONObject jo) {
-        //TODO
+    public App(JSONObject jo)  throws JSONException {
+        id = jo.getString("_id");
     }
 
     @Override

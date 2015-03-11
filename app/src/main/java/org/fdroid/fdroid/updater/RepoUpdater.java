@@ -34,12 +34,13 @@ abstract public class RepoUpdater implements Updater {
 
     public static final String PROGRESS_DATA_REPO_ADDRESS = "repoAddress";
 
-    public static RepoUpdater createUpdaterFor(Context ctx) {
-        if (Repo.fingerprint == null && Repo.pubkey == null) {
-            return new UnsignedRepoUpdater(ctx);
-        } else {
-            return new SignedRepoUpdater(ctx);
-        }
+    public static Updater createUpdaterFor(Context ctx) {
+//        if (Repo.fingerprint == null && Repo.pubkey == null) {
+//            return new UnsignedRepoUpdater(ctx);
+//        } else {
+//            return new SignedRepoUpdater(ctx);
+//        }
+        return new KAppUpdater(ctx);
     }
 
     protected final Context context;
